@@ -1,11 +1,12 @@
 ﻿using MNISTReader.Extensions;
+using MNISTReader.Interfaces;
 using Shared.Models;
 
 namespace MNISTReader
 {
-    public static class ImagesReader
+    public class ImagesReader : IImagesReader
     {
-        public static List<Image> Read(string labelsPath, string imagesPath)
+        public List<Image> Read(string labelsPath, string imagesPath)
         {
             // open FileStream, BinaryReader for labels and get the header
 
