@@ -32,5 +32,13 @@
                 return _pixels[x + _width * y]; 
             }
         }
+
+        public byte[] Pixels
+        {
+            get
+            { 
+                return _pixels; 
+            } 
+        }
     }
 }
