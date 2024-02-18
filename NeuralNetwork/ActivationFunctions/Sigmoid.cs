@@ -1,6 +1,6 @@
-﻿using Shared.Interfaces;
+﻿using NeuralNetwork.Interfaces;
 
-namespace Shared.Models.ActivationFunctions
+namespace NeuralNetwork.ActivationFunctions
 {
     public class Sigmoid : IActivationFunction
     {

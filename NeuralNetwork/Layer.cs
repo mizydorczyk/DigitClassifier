@@ -1,6 +1,6 @@
-﻿using Shared.Interfaces;
+﻿using NeuralNetwork.Interfaces;
 
-namespace Shared.Models
+namespace NeuralNetwork
 {
     public class Layer
     {

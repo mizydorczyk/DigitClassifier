@@ -1,4 +1,4 @@
-﻿namespace Shared.Interfaces
+﻿namespace NeuralNetwork.Interfaces
 {
     public interface IActivationFunction
     {

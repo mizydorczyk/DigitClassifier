@@ -1,11 +1,11 @@
-﻿using Shared.Interfaces;
+﻿using NeuralNetwork.Interfaces;
 
-namespace Shared.Models
+namespace NeuralNetwork
 {
-    public class NeutralNetwork
+    public class Network
     {
         private readonly Layer[] _layers;
-        public NeutralNetwork(int[] layerSizes, IActivationFunction activationFunction)
+        public Network(int[] layerSizes, IActivationFunction activationFunction)
         {
             _layers = new Layer[layerSizes.Length - 1];
 
