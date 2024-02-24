@@ -1,6 +1,4 @@
-﻿using Shared.Models;
-
-namespace MNISTReader.Interfaces
+﻿namespace MNISTReader.Interfaces
 {
     public interface IImagesReader
     {

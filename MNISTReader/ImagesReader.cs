@@ -1,6 +1,5 @@
 ﻿using MNISTReader.Extensions;
 using MNISTReader.Interfaces;
-using Shared.Models;
 
 namespace MNISTReader
 {
