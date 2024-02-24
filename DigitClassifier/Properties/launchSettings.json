@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DigitClassifier (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DigitClassifier (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
