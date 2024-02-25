@@ -1,10 +1,11 @@
-﻿using Microsoft.UI.Xaml;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DigitClassifier.Interfaces;
 using DigitClassifier.Services;
 using DigitClassifier.ViewModels;
 using DigitClassifier.Views;
+using WinUIEx;
+using Microsoft.UI.Xaml;
 
 namespace DigitClassifier
 {
@@ -22,7 +23,7 @@ namespace DigitClassifier
             return service;
         }
 
-        public static Window MainWindow { get; } = new MainWindow();
+        public static WindowEx MainWindow { get; } = new MainWindow();
         public App()
         {
             InitializeComponent();

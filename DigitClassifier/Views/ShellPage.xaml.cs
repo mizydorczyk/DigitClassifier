@@ -1,3 +1,4 @@
+using DigitClassifier.Helpers;
 using DigitClassifier.ViewModels;
 using Microsoft.UI.Xaml.Controls;
 
@@ -10,6 +11,10 @@ namespace DigitClassifier.Views
         {
             ViewModel = viewModel;
             InitializeComponent();
+
+            App.MainWindow.ExtendsContentIntoTitleBar = true;
+            App.MainWindow.SetTitleBar(AppTitleBar);
+            ApplicationTitle.Text = "ApplicationTitle".GetLocalized();
         }
     }
 }
