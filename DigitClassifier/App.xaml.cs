@@ -6,6 +6,8 @@ using DigitClassifier.ViewModels;
 using DigitClassifier.Views;
 using WinUIEx;
 using Microsoft.UI.Xaml;
+using DigitClassifier.Activation;
+using Windows.UI.ApplicationSettings;
 
 namespace DigitClassifier
 {
@@ -33,21 +35,32 @@ namespace DigitClassifier
                 UseContentRoot(AppContext.BaseDirectory).
                 ConfigureServices((context, services) =>
                 {
+                    // activation handlers
+                    services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
+
                     // services
                     services.AddSingleton<IActivationService, ActivationService>();
+                    services.AddSingleton<INavigationService, NavigationService>();
+                    services.AddSingleton<IPageService, PageService>();
+
+                    services.AddTransient<INavigationViewService, NavigationViewService>();
 
                     // views and view models
                     services.AddTransient<ShellPage>();
                     services.AddTransient<ShellViewModel>();
+                    services.AddTransient<ImagesPage>();
+                    services.AddTransient<ImagesViewModel>();
+                    services.AddTransient<NetworksPage>();
+                    services.AddTransient<NetworksViewModel>();
                 }).
                 Build();
         }
 
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected async override void OnLaunched(LaunchActivatedEventArgs args)
         {
             base.OnLaunched(args);
 
-            GetService<IActivationService>().Activate(args);
+            await GetService<IActivationService>().ActivateAsync(args);
         }
     }
 }

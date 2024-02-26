@@ -2,6 +2,6 @@
 {
     public interface IActivationService
     {
-        void Activate(object activationArgs);
+        Task ActivateAsync(object activationArgs);
     }
 }

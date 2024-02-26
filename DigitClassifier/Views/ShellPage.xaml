@@ -3,7 +3,7 @@
     x:Class="DigitClassifier.Views.ShellPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:DigitClassifier.Views"
+    xmlns:helpers="using:DigitClassifier.Helpers"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -42,6 +42,28 @@
                                Margin="10,0,0,0"/>
                 </Grid>
             </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <NavigationView x:Name="NavigationViewControl"
+                            IsBackButtonVisible="Collapsed"
+                            IsPaneToggleButtonVisible="False"
+                            PaneDisplayMode="Left"
+                            IsPaneOpen="True"
+                            IsBackEnabled="False"
+                            IsSettingsVisible="False"
+                            SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
+                            AlwaysShowHeader="False">
+                <NavigationView.MenuItems>
+                    <NavigationViewItem x:Uid="Shell_Images" helpers:NavigationHelper.NavigateTo="DigitClassifier.ViewModels.ImagesViewModel"/>
+                    <NavigationViewItem x:Uid="Shell_Networks" helpers:NavigationHelper.NavigateTo="DigitClassifier.ViewModels.NetworksViewModel"/>
+                </NavigationView.MenuItems>
+                <NavigationView.Content>
+                    <Grid Margin="{StaticResource NavigationViewPageContentMargin}">
+                        <Frame x:Name="NavigationFrame"/>
+                    </Grid>
+                </NavigationView.Content>
+            </NavigationView>
         </Grid>
     </Grid>
 </Page>

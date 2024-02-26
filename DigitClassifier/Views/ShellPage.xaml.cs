@@ -12,6 +12,9 @@ namespace DigitClassifier.Views
             ViewModel = viewModel;
             InitializeComponent();
 
+            ViewModel.NavigationService.Frame = NavigationFrame;
+            ViewModel.NavigationViewService.Initialize(NavigationViewControl);
+
             App.MainWindow.ExtendsContentIntoTitleBar = true;
             App.MainWindow.SetTitleBar(AppTitleBar);
             ApplicationTitle.Text = "ApplicationTitle".GetLocalized();

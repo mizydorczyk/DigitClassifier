@@ -120,4 +120,10 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Digit Classifier</value>
   </data>
+  <data name="Shell_Images.Content" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Shell_Networks.Content" xml:space="preserve">
+    <value>Networks</value>
+  </data>
 </root>
