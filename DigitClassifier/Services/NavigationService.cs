@@ -1,7 +1,6 @@
 ﻿using DigitClassifier.Interfaces;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using System.Diagnostics;
 
 namespace DigitClassifier.Services
 {

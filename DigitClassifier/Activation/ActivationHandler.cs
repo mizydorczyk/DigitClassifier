@@ -1,5 +1,4 @@
 ﻿namespace DigitClassifier.Activation;
-
 public abstract class ActivationHandler<T> : IActivationHandler where T : class
 {
     protected virtual bool CanHandleInternal(T args) => true;

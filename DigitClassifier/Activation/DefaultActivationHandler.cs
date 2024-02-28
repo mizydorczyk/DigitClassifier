@@ -1,6 +1,5 @@
 ﻿using DigitClassifier.Interfaces;
 using DigitClassifier.ViewModels;
-using DigitClassifier.Views;
 using Microsoft.UI.Xaml;
 
 namespace DigitClassifier.Activation;
@@ -21,7 +20,7 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
 
     protected async override Task HandleInternalAsync(LaunchActivatedEventArgs args)
     {
-        _navigationService.NavigateTo(typeof(ImagesViewModel).FullName!, args.Arguments);
+        _navigationService.NavigateTo(typeof(DrawingViewModel).FullName!, args.Arguments);
 
         await Task.CompletedTask;
     }

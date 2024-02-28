@@ -12,8 +12,11 @@ public class PageService : IPageService
 
     public PageService()
     {
-        Configure<ImagesViewModel, ImagesPage>();
+        Configure<DrawingViewModel, DrawingPage>();
         Configure<NetworksViewModel, NetworksPage>();
+        Configure<ImagesViewModel, ImagesPage>();
+        Configure<TrainingViewModel, TrainingPage>();
+        Configure<SettingsViewModel, SettingsPage>();
     }
 
     public Type GetPageType(string key)

@@ -28,18 +28,18 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" Height="50">
+                <Grid Grid.Column="0" Height="46">
                     <Image Source="/Assets/Images/ApplicationIcon.png"/>
                 </Grid>
 
-                <Grid Grid.Column="1" Height="50">
+                <Grid Grid.Column="1" Height="46">
                     <TextBlock x:Name="ApplicationTitle"
                                VerticalAlignment="Stretch"
                                FontSize="{StaticResource LargeFontSize}"
-                               FontFamily="{StaticResource SohoGothicPro}"
+                               FontFamily="{StaticResource SohoGothicProMedium}"
                                Foreground="{StaticResource ApplicationTitleForeground}"
                                CharacterSpacing="50"
-                               Margin="10,0,0,0"/>
+                               Margin="5,0,0,0"/>
                 </Grid>
             </Grid>
         </Grid>
@@ -53,10 +53,54 @@
                             IsBackEnabled="False"
                             IsSettingsVisible="False"
                             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
-                            AlwaysShowHeader="False">
+                            AlwaysShowHeader="False"
+                            OpenPaneLength="240">
                 <NavigationView.MenuItems>
-                    <NavigationViewItem x:Uid="Shell_Images" helpers:NavigationHelper.NavigateTo="DigitClassifier.ViewModels.ImagesViewModel"/>
-                    <NavigationViewItem x:Uid="Shell_Networks" helpers:NavigationHelper.NavigateTo="DigitClassifier.ViewModels.NetworksViewModel"/>
+                    <NavigationViewItem x:Uid="Shell_Drawing"
+                                        FontSize="{StaticResource SmallFontSize}"
+                                        Padding="{StaticResource NavigationViewItemPadding}"
+                                        FontFamily="{StaticResource SohoGothicProMedium}"
+                                        helpers:NavigationHelper.NavigateTo="DigitClassifier.ViewModels.DrawingViewModel">
+                        <NavigationViewItem.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE929;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem x:Uid="Shell_Networks"
+                                        FontSize="{StaticResource SmallFontSize}"
+                                        Padding="{StaticResource NavigationViewItemPadding}"
+                                        FontFamily="{StaticResource SohoGothicProMedium}"
+                                        helpers:NavigationHelper.NavigateTo="DigitClassifier.ViewModels.NetworksViewModel">
+                        <NavigationViewItem.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE81E;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem x:Uid="Shell_Images"
+                                        FontSize="{StaticResource SmallFontSize}"
+                                        Padding="{StaticResource NavigationViewItemPadding}"
+                                        FontFamily="{StaticResource SohoGothicProMedium}"
+                                        helpers:NavigationHelper.NavigateTo="DigitClassifier.ViewModels.ImagesViewModel">
+                        <NavigationViewItem.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEB9F;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem x:Uid="Shell_Training"
+                                        FontSize="{StaticResource SmallFontSize}"
+                                        Padding="{StaticResource NavigationViewItemPadding}"
+                                        FontFamily="{StaticResource SohoGothicProMedium}"
+                                        helpers:NavigationHelper.NavigateTo="DigitClassifier.ViewModels.TrainingViewModel">
+                        <NavigationViewItem.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF22C;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
+                    <NavigationViewItem x:Uid="Shell_Settings"
+                                        FontSize="{StaticResource SmallFontSize}"
+                                        Padding="{StaticResource NavigationViewItemPadding}"
+                                        FontFamily="{StaticResource SohoGothicProMedium}"
+                                        helpers:NavigationHelper.NavigateTo="DigitClassifier.ViewModels.SettingsViewModel">
+                        <NavigationViewItem.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE713;"/>
+                        </NavigationViewItem.Icon>
+                    </NavigationViewItem>
                 </NavigationView.MenuItems>
                 <NavigationView.Content>
                     <Grid Margin="{StaticResource NavigationViewPageContentMargin}">

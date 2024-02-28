@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using DigitClassifier.Interfaces;
 using Microsoft.UI.Xaml.Navigation;
-using Windows.UI.ApplicationSettings;
 
 namespace DigitClassifier.ViewModels
 {

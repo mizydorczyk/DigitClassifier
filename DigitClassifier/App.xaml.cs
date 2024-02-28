@@ -48,10 +48,21 @@ namespace DigitClassifier
                     // views and view models
                     services.AddTransient<ShellPage>();
                     services.AddTransient<ShellViewModel>();
-                    services.AddTransient<ImagesPage>();
-                    services.AddTransient<ImagesViewModel>();
+
+                    services.AddTransient<DrawingPage>();
+                    services.AddTransient<DrawingViewModel>();
+
                     services.AddTransient<NetworksPage>();
                     services.AddTransient<NetworksViewModel>();
+
+                    services.AddTransient<ImagesPage>();
+                    services.AddTransient<ImagesViewModel>();
+
+                    services.AddTransient<TrainingPage>();
+                    services.AddTransient<TrainingViewModel>();
+
+                    services.AddTransient<SettingsPage>();
+                    services.AddTransient<SettingsViewModel>();
                 }).
                 Build();
         }
