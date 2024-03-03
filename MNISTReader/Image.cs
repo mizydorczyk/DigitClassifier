@@ -1,5 +1,10 @@
 ﻿namespace MNISTReader
 {
+    public enum Category
+    {
+        Training,
+        Test
+    }
     public class Image
     {
         private readonly byte[] _pixels;
@@ -7,9 +12,11 @@
         private readonly int _height;
 
         public int Label { get; private set; }
-        public Image(int label, byte[] pixels, int width, int height)
+        public Category Category { get; private set; }
+        public Image(int label, Category category, byte[] pixels, int width, int height)
         {
             Label = label;
+            Category = category;
 
             _pixels = pixels;
             _width = width;

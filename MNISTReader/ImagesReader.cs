@@ -5,7 +5,7 @@ namespace MNISTReader
 {
     public class ImagesReader : IImagesReader
     {
-        public List<Image> Read(string labelsPath, string imagesPath)
+        public IList<Image> Read(Category category, string labelsPath, string imagesPath)
         {
             // open FileStream, BinaryReader for labels and get the header
 
@@ -57,7 +57,7 @@ namespace MNISTReader
                 var label = Convert.ToInt32(labelsBinaryReader.ReadByte());
                 var bytes = imagesBinaryReader.ReadBytes(imageWidth * imageHeight);
 
-                images.Add(new Image(label, bytes, imageWidth, imageHeight));
+                images.Add(new Image(label, category, bytes, imageWidth, imageHeight));
             }
 
             return images;

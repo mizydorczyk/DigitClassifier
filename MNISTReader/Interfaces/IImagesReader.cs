@@ -2,6 +2,6 @@
 {
     public interface IImagesReader
     {
-        public List<Image> Read(string labelsPath, string imagesPath);
+        public IList<Image> Read(Category category, string labelsPath, string imagesPath);
     }
 }
