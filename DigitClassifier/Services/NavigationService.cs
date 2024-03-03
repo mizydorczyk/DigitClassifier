@@ -1,4 +1,5 @@
-﻿using DigitClassifier.Interfaces;
+﻿using DigitClassifier.Extensions;
+using DigitClassifier.Interfaces;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 
@@ -59,7 +60,17 @@ namespace DigitClassifier.Services
 
             if (_frame != null && _frame.Content?.GetType() != pageType)
             {
-                return _frame.Navigate(pageType, parameter); ;
+                var vmBeforeNavigation = _frame.GetPageViewModel();
+                var navigated = _frame.Navigate(pageType, parameter);
+                if (navigated)
+                {
+                    if (vmBeforeNavigation is INavigationAware navigationAware)
+                    {
+                        navigationAware.OnNavigatedFrom();
+                    }
+                }
+
+                return navigated;
             }
 
             return false;
@@ -69,6 +80,11 @@ namespace DigitClassifier.Services
         {
             if (sender is Frame frame)
             {
+                if (frame.GetPageViewModel() is INavigationAware navigationAware)
+                {
+                    navigationAware.OnNavigatedTo(e.Parameter);
+                }
+
                 Navigated?.Invoke(sender, e);
             }
         }

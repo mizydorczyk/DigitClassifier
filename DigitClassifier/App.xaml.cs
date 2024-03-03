@@ -7,7 +7,7 @@ using DigitClassifier.Views;
 using WinUIEx;
 using Microsoft.UI.Xaml;
 using DigitClassifier.Activation;
-using Windows.UI.ApplicationSettings;
+using DigitClassifier.Models;
 
 namespace DigitClassifier
 {
@@ -30,15 +30,16 @@ namespace DigitClassifier
         {
             InitializeComponent();
 
-            Host = Microsoft.Extensions.Hosting.Host.
-                CreateDefaultBuilder().
-                UseContentRoot(AppContext.BaseDirectory).
-                ConfigureServices((context, services) =>
+            Host = Microsoft.Extensions.Hosting.Host
+                .CreateDefaultBuilder()
+                .UseContentRoot(AppContext.BaseDirectory)
+                .ConfigureServices((context, services) =>
                 {
                     // activation handlers
                     services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
                     // services
+                    services.AddSingleton<ILocalSettingsService, LocalSettingsService>();
                     services.AddSingleton<IActivationService, ActivationService>();
                     services.AddSingleton<INavigationService, NavigationService>();
                     services.AddSingleton<IPageService, PageService>();
@@ -63,6 +64,9 @@ namespace DigitClassifier
 
                     services.AddTransient<SettingsPage>();
                     services.AddTransient<SettingsViewModel>();
+
+                    // configuration
+                    services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
                 }).
                 Build();
         }
