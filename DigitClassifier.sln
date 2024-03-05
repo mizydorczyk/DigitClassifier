@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MNISTReader", "MNISTReader\MNISTReader.csproj", "{F2207F63-2A0D-4921-AA06-6C9CCA689C22}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitClassifier", "DigitClassifier\DigitClassifier.csproj", "{5EC9F079-93E0-4C50-985B-814144765498}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NeuralNetwork", "NeuralNetwork\NeuralNetwork.csproj", "{456D4450-A26D-4536-86DB-6B1D4C37BF0C}"
@@ -21,22 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Debug|x64.Build.0 = Debug|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Debug|x86.Build.0 = Debug|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Release|ARM64.Build.0 = Release|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Release|x64.ActiveCfg = Release|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Release|x64.Build.0 = Release|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Release|x86.ActiveCfg = Release|Any CPU
-		{F2207F63-2A0D-4921-AA06-6C9CCA689C22}.Release|x86.Build.0 = Release|Any CPU
 		{5EC9F079-93E0-4C50-985B-814144765498}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{5EC9F079-93E0-4C50-985B-814144765498}.Debug|Any CPU.Build.0 = Debug|x64
 		{5EC9F079-93E0-4C50-985B-814144765498}.Debug|Any CPU.Deploy.0 = Debug|x64

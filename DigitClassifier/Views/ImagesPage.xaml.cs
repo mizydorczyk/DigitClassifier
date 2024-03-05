@@ -8,7 +8,7 @@ namespace DigitClassifier.Views
         public ImagesViewModel ViewModel { get; private set; }
         public ImagesPage()
         {
-            ViewModel = App.GetService<ImagesViewModel>(); ;
+            ViewModel = App.GetService<ImagesViewModel>();
             InitializeComponent();
         }
     }

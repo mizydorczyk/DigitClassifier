@@ -5,9 +5,91 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:DigitClassifier.Converters" 
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:c="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea">
+    <Page.Resources>
+        <DataTemplate x:Key='ImageTemplate'>
+            <Image Source="{Binding}" Width="56" Height="56"/>
+        </DataTemplate>
+        <converters:NullToAllConverter x:Key="NullToAllConverter" />
+    </Page.Resources>
 
+    <Grid x:Name="ContentArea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="0,10,0,10">
+                <TextBlock VerticalAlignment="Center" FontSize="{StaticResource SmallFontSize}">Category:</TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="10,10,10,10">
+                <ComboBox VerticalAlignment="Center" 
+                          SelectedItem="{x:Bind ViewModel.SelectedCategory, Converter={StaticResource NullToAllConverter}}"
+                          Width="180">
+                    <x:String>All</x:String>
+                    <x:String>Training</x:String>
+                    <x:String>Test</x:String>
+                    <i:Interaction.Behaviors>
+                        <c:EventTriggerBehavior EventName="SelectionChanged">
+                            <c:InvokeCommandAction Command="{x:Bind ViewModel.CategorySelectionChangedCommand}" />
+                        </c:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                </ComboBox>
+            </Grid>
+
+            <Grid Grid.Column="2" Margin="10,10,0,10">
+                <TextBlock VerticalAlignment="Center" FontSize="{StaticResource SmallFontSize}">Label:</TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="3" Margin="10,10,0,10">
+                <ComboBox VerticalAlignment="Center"
+                          SelectedItem="{x:Bind ViewModel.SelectedLabel, Converter={StaticResource NullToAllConverter}}"
+                          Width="90">
+                    <x:String>All</x:String>
+                    <x:String>0</x:String>
+                    <x:String>1</x:String>
+                    <x:String>2</x:String>
+                    <x:String>3</x:String>
+                    <x:String>4</x:String>
+                    <x:String>5</x:String>
+                    <x:String>6</x:String>
+                    <x:String>7</x:String>
+                    <x:String>8</x:String>
+                    <x:String>9</x:String>
+                    <i:Interaction.Behaviors>
+                        <c:EventTriggerBehavior EventName="SelectionChanged">
+                            <c:InvokeCommandAction Command="{x:Bind ViewModel.LabelsSelectionChangedCommand}" />
+                        </c:EventTriggerBehavior>
+                    </i:Interaction.Behaviors>
+                </ComboBox>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <GridView
+                x:Name="ContentGridView"
+                ItemsSource="{x:Bind ViewModel.Images}"
+                ItemTemplate="{StaticResource ImageTemplate}"
+                IsItemClickEnabled="False"
+                CanDragItems="False"
+                AllowDrop="False"
+                CanReorderItems="False"
+                SelectionMode="None"
+                FlowDirection="LeftToRight">
+            </GridView>
+        </Grid>
     </Grid>
 </Page>

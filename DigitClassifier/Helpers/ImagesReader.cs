@@ -1,11 +1,11 @@
-﻿using MNISTReader.Extensions;
-using MNISTReader.Interfaces;
+﻿using DigitClassifier.Extensions;
+using DigitClassifier.Models;
 
-namespace MNISTReader
+namespace DigitClassifier.Helpers
 {
-    public class ImagesReader : IImagesReader
+    public class ImagesReader
     {
-        public IList<Image> Read(Category category, string labelsPath, string imagesPath)
+        public IList<Image> Read(ImageCategory category, string labelsPath, string imagesPath)
         {
             // open FileStream, BinaryReader for labels and get the header
 
@@ -19,10 +19,9 @@ namespace MNISTReader
             // The labels values are 0 to 9.
 
             using var labelsFileStream = new FileStream(labelsPath, FileMode.Open);
-            using var labelsBinaryReader = new BinaryReader(labelsFileStream);
 
-            int magicNumberLabels = labelsBinaryReader.ReadBigEndianInt32();
-            int numberOfLabels = labelsBinaryReader.ReadBigEndianInt32();
+            int magicNumberLabels = labelsFileStream.ReadBigEndianInt32();
+            int numberOfLabels = labelsFileStream.ReadBigEndianInt32();
 
             // open FileStream, BinaryReader for images and get the header
 
@@ -38,12 +37,11 @@ namespace MNISTReader
             // Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background(white), 255 means foreground(black). 
 
             using var imagesFileStream = new FileStream(imagesPath, FileMode.Open);
-            using var imagesBinaryReader = new BinaryReader(imagesFileStream);
 
-            int magicNumberImages = imagesBinaryReader.ReadBigEndianInt32();
-            int numberOfImages = imagesBinaryReader.ReadBigEndianInt32();
-            int imageWidth = imagesBinaryReader.ReadBigEndianInt32();
-            int imageHeight = imagesBinaryReader.ReadBigEndianInt32();
+            int magicNumberImages = imagesFileStream.ReadBigEndianInt32();
+            int numberOfImages = imagesFileStream.ReadBigEndianInt32();
+            int imageWidth = imagesFileStream.ReadBigEndianInt32();
+            int imageHeight = imagesFileStream.ReadBigEndianInt32();
 
             if (numberOfImages != numberOfLabels)
                 throw new ArgumentException("The number of images is different from labels.");
@@ -54,8 +52,9 @@ namespace MNISTReader
 
             for (int i = 0; i < numberOfImages; i++)
             {
-                var label = Convert.ToInt32(labelsBinaryReader.ReadByte());
-                var bytes = imagesBinaryReader.ReadBytes(imageWidth * imageHeight);
+                var label = Convert.ToInt32(labelsFileStream.ReadByte());
+                var bytes = new byte[imageWidth * imageHeight];
+                imagesFileStream.Read(bytes, 0, imageWidth * imageHeight);
 
                 images.Add(new Image(label, category, bytes, imageWidth, imageHeight));
             }
