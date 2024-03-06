@@ -8,6 +8,188 @@
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0" Margin="0,4,0,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" >
+                <TextBlock Text="Training labels file" Margin="0,2,0,2"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                             VerticalContentAlignment="Center"
+                             Padding="6"
+                             BorderThickness="0"
+                             CornerRadius="0"
+                             TextWrapping="NoWrap"
+                             IsSpellCheckEnabled="False"
+                             Text="{x:Bind ViewModel.TrainingLabelsFile}"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Button CornerRadius="0">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8E5;" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,4,0,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,2,0,2">
+                <TextBlock Text="Training images file"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                             VerticalContentAlignment="Center"
+                             Padding="6"
+                             BorderThickness="0"
+                             CornerRadius="0"
+                             TextWrapping="NoWrap"
+                             IsSpellCheckEnabled="False"
+                             Text="{x:Bind ViewModel.TrainingImagesFile}"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Button CornerRadius="0">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8E5;" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="0,4,0,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,2,0,2">
+                <TextBlock Text="Test labels file"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                             VerticalContentAlignment="Center"
+                             Padding="6"
+                             BorderThickness="0"
+                             CornerRadius="0"
+                             TextWrapping="NoWrap"
+                             IsSpellCheckEnabled="False"
+                             Text="{x:Bind ViewModel.TestLabelsFile}"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Button CornerRadius="0">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8E5;" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0,4,0,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,2,0,2">
+                <TextBlock Text="Test images file"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                             VerticalContentAlignment="Center"
+                             Padding="6"
+                             BorderThickness="0"
+                             CornerRadius="0"
+                             TextWrapping="NoWrap"
+                             IsSpellCheckEnabled="False"
+                             Text="{x:Bind ViewModel.TestImagesFile}"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Button CornerRadius="0">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8E5;" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+
+
+        <Grid Grid.Row="4" Margin="0,4,0,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="0,2,0,2">
+                <TextBlock Text="Networks folder"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                             VerticalContentAlignment="Center"
+                             Padding="6"
+                             BorderThickness="0"
+                             CornerRadius="0"
+                             TextWrapping="NoWrap"
+                             IsSpellCheckEnabled="False"
+                             Text="{x:Bind ViewModel.NetworksFolder}"/>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Button CornerRadius="0">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED25;" />
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

@@ -64,10 +64,10 @@ namespace DigitClassifier.Services
                 if (string.IsNullOrEmpty(await _localSettingsService.ReadSettingAsync<string>(option))){
                     var defaultValue = (option) switch 
                     {
-                        "TrainingImagesFile" => Path.Combine(root, "Assets/train-images.idx3-ubyte"),
-                        "TrainingLabelsFile" => Path.Combine(root, "Assets/train-labels.idx1-ubyte"),
-                        "TestImagesFile" => Path.Combine(root, "Assets/t10k-images.idx3-ubyte"),
-                        "TestLabelsFile" => Path.Combine(root, "Assets/t10k-labels.idx1-ubyte"),
+                        "TrainingImagesFile" => Path.Combine(root, @"Assets\train-images.idx3-ubyte"),
+                        "TrainingLabelsFile" => Path.Combine(root, @"Assets\train-labels.idx1-ubyte"),
+                        "TestImagesFile" => Path.Combine(root, @"Assets\t10k-images.idx3-ubyte"),
+                        "TestLabelsFile" => Path.Combine(root, @"Assets\t10k-labels.idx1-ubyte"),
                         _ => string.Empty
                     };
 

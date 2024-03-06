@@ -120,15 +120,6 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Digit Classifier</value>
   </data>
-  <data name="Settings_About.Text" xml:space="preserve">
-    <value>About this application</value>
-  </data>
-  <data name="Settings_Images.Text" xml:space="preserve">
-    <value>Images</value>
-  </data>
-  <data name="Settings_Networks.Text" xml:space="preserve">
-    <value>Networks</value>
-  </data>
   <data name="Shell_Drawing.Content" xml:space="preserve">
     <value>Drawing</value>
   </data>
