@@ -6,8 +6,7 @@ namespace DigitClassifier.ViewModels
 {
     public partial class ShellViewModel : ObservableRecipient
     {
-        [ObservableProperty]
-        private object? selected;
+        [ObservableProperty] private object? selected;
 
         public INavigationService NavigationService { get; private set; }
         public INavigationViewService NavigationViewService { get; private set; }

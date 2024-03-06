@@ -5,6 +5,7 @@ namespace NeuralNetwork
     public class Network
     {
         private readonly Layer[] _layers;
+
         public Network(int[] layerSizes, IActivationFunction activationFunction)
         {
             _layers = new Layer[layerSizes.Length - 1];

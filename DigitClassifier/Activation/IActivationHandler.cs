@@ -1,4 +1,5 @@
 ﻿namespace DigitClassifier.Activation;
+
 public interface IActivationHandler
 {
     bool CanHandle(object args);

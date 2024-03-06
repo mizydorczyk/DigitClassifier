@@ -26,6 +26,7 @@ namespace DigitClassifier
         }
 
         public static WindowEx MainWindow { get; } = new MainWindow();
+
         public App()
         {
             InitializeComponent();
@@ -68,8 +69,7 @@ namespace DigitClassifier
 
                     // configuration
                     services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
-                }).
-                Build();
+                }).Build();
         }
 
         protected async override void OnLaunched(LaunchActivatedEventArgs args)

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <winEx:WindowEx
     x:Class="DigitClassifier.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -14,6 +15,6 @@
     Width="1020"
     Height="680">
     <Window.SystemBackdrop>
-        <DesktopAcrylicBackdrop/>
+        <DesktopAcrylicBackdrop />
     </Window.SystemBackdrop>
 </winEx:WindowEx>

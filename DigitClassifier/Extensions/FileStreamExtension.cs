@@ -12,7 +12,7 @@
             {
                 Array.Reverse(bytes);
             }
-                
+
             return BitConverter.ToInt32(bytes, 0);
         }
     }

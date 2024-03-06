@@ -6,9 +6,10 @@ namespace DigitClassifier.Views
     public sealed partial class SettingsPage : Page
     {
         public SettingsViewModel ViewModel { get; private set; }
+
         public SettingsPage()
         {
-            ViewModel = App.GetService<SettingsViewModel>(); ;
+            ViewModel = App.GetService<SettingsViewModel>();
             InitializeComponent();
         }
     }

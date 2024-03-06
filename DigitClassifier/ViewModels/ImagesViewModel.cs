@@ -22,10 +22,8 @@ namespace DigitClassifier.ViewModels
         public ICommand CategorySelectionChangedCommand { get; }
         public ICommand LabelsSelectionChangedCommand { get; }
 
-        [ObservableProperty]
-        private ImageCategory? _selectedCategory = null;
-        [ObservableProperty]
-        private int? _selectedLabel = null;
+        [ObservableProperty] private ImageCategory? _selectedCategory = null;
+        [ObservableProperty] private int? _selectedLabel = null;
 
         private Func<Models.Image, bool>? _categoryFilter;
         private Func<Models.Image, bool>? _labelsFilter;
@@ -77,7 +75,7 @@ namespace DigitClassifier.ViewModels
                     Images.Clear();
                     break;
                 }
-                    
+
                 using (var softwareBitmap = new SoftwareBitmap(BitmapPixelFormat.Gray8, width, height))
                 {
                     softwareBitmap.CopyFromBuffer(image.Pixels.AsBuffer());

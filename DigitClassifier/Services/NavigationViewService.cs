@@ -15,14 +15,16 @@ namespace DigitClassifier.Services
             _navigationService = navigationService;
             _pageService = pageService;
         }
+
         public void Initialize(NavigationView navigationView)
         {
             _navigationView = navigationView;
             _navigationView.ItemInvoked += OnItemInvoked;
         }
+
         private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            var selectedItem = (NavigationViewItem) args.InvokedItemContainer;
+            var selectedItem = (NavigationViewItem)args.InvokedItemContainer;
 
             if (selectedItem?.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
             {

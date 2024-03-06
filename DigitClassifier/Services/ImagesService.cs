@@ -13,9 +13,10 @@ namespace DigitClassifier.Services
         {
             _localSettingsService = localSettingsService;
         }
+
         public async Task<List<Image>> GetImagesAsync(bool refresh = false)
         {
-            if(_images != null && !refresh)
+            if (_images != null && !refresh)
                 return _images;
 
             var reader = new ImagesReader();

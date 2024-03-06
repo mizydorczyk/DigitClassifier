@@ -13,12 +13,14 @@ namespace DigitClassifier.Services
         private readonly ILocalSettingsService _localSettingsService;
         private UIElement? _shell = null;
 
-        public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, ILocalSettingsService localSettingsService)
+        public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers,
+            ILocalSettingsService localSettingsService)
         {
             _defaultHandler = defaultHandler;
             _activationHandlers = activationHandlers;
             _localSettingsService = localSettingsService;
         }
+
         public async Task ActivateAsync(object activationArgs)
         {
             if (App.MainWindow.Content == null)
@@ -58,11 +60,12 @@ namespace DigitClassifier.Services
                 "TestLabelsFile"
             };
 
-            foreach(var option in options)
+            foreach (var option in options)
             {
                 var root = AppDomain.CurrentDomain.BaseDirectory;
-                if (string.IsNullOrEmpty(await _localSettingsService.ReadSettingAsync<string>(option))){
-                    var defaultValue = (option) switch 
+                if (string.IsNullOrEmpty(await _localSettingsService.ReadSettingAsync<string>(option)))
+                {
+                    var defaultValue = (option) switch
                     {
                         "TrainingImagesFile" => Path.Combine(root, @"Assets\train-images.idx3-ubyte"),
                         "TrainingLabelsFile" => Path.Combine(root, @"Assets\train-labels.idx1-ubyte"),

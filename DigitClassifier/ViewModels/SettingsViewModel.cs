@@ -6,16 +6,11 @@ namespace DigitClassifier.ViewModels
     public partial class SettingsViewModel : ObservableRecipient, INavigationAware
     {
         private readonly ILocalSettingsService _localSettingsService;
-        [ObservableProperty]
-        private string? _trainingLabelsFile;
-        [ObservableProperty]
-        private string? _trainingImagesFile;
-        [ObservableProperty]
-        private string? _testLabelsFile;
-        [ObservableProperty]
-        private string? _testImagesFile;
-        [ObservableProperty]
-        private string? _networksFolder;
+        [ObservableProperty] private string? _trainingLabelsFile;
+        [ObservableProperty] private string? _trainingImagesFile;
+        [ObservableProperty] private string? _testLabelsFile;
+        [ObservableProperty] private string? _testImagesFile;
+        [ObservableProperty] private string? _networksFolder;
 
         public SettingsViewModel(ILocalSettingsService localSettingsService)
         {

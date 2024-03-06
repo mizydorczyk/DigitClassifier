@@ -8,5 +8,4 @@ namespace DigitClassifier.Helpers
 
         public static string GetLocalized(this string resourceKey) => _resourceLoader.GetString(resourceKey);
     }
-
 }

@@ -18,7 +18,7 @@ namespace NeuralNetwork
             // each neuron has number of nodes in weights and only one bias
             _weights = new double[numberOfNodesIn * numberOfNodesOut];
             _biases = new double[numberOfNodesOut];
-            
+
             _activationFunction = activationFunction;
         }
 
@@ -37,6 +37,7 @@ namespace NeuralNetwork
                     // modify weightedInput by the weight of the incoming neuron multiplied by the input from the previous layer
                     weightedInput += inputs[nodeIn] * _weights[nodeOut * _numberOfNodesIn + nodeIn];
                 }
+
                 weightedInputs[nodeOut] = weightedInput;
             }
 
