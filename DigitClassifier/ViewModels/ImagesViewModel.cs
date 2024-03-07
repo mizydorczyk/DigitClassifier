@@ -1,13 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DigitClassifier.Helpers;
 using DigitClassifier.Interfaces;
 using DigitClassifier.Models;
-using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
+using Serilog;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
 using System.Windows.Input;
 using Windows.Graphics.Imaging;
 using Windows.Storage.Streams;
@@ -44,57 +44,61 @@ namespace DigitClassifier.ViewModels
 
         public async void OnNavigatedTo(object parameter)
         {
-            await LoadImages();
+            await LoadImages(true);
         }
 
-        private async Task LoadImages()
+        private async Task LoadImages(bool refresh = false)
         {
-            if (_loadingCancellationToken != null)
-            {
-                _loadingCancellationToken.Cancel();
-            }
+            _loadingCancellationToken?.Cancel();
 
             _loadingCancellationToken = new CancellationTokenSource();
             var loadingCancellationToken = _loadingCancellationToken.Token;
 
-            var images = await _imagesService.GetImagesAsync();
-
-            if (_categoryFilter != null)
-                images = images.Where(_categoryFilter).ToList();
-
-            if (_labelsFilter != null)
-                images = images.Where(_labelsFilter).ToList();
-
-            var width = images[0].Width;
-            var height = images[0].Height;
-
-            foreach (var image in images)
+            try
             {
-                if (loadingCancellationToken.IsCancellationRequested)
-                {
-                    Images.Clear();
-                    break;
-                }
+                var images = await _imagesService.GetImagesAsync(refresh);
 
-                using (var softwareBitmap = new SoftwareBitmap(BitmapPixelFormat.Gray8, width, height))
-                {
-                    softwareBitmap.CopyFromBuffer(image.Pixels.AsBuffer());
+                if (_categoryFilter != null)
+                    images = images.Where(_categoryFilter).ToList();
 
-                    using (var stream = new InMemoryRandomAccessStream())
+                if (_labelsFilter != null)
+                    images = images.Where(_labelsFilter).ToList();
+
+                var width = images[0].Width;
+                var height = images[0].Height;
+
+                foreach (var image in images)
+                {
+                    if (loadingCancellationToken.IsCancellationRequested)
                     {
-                        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
-                        encoder.SetSoftwareBitmap(SoftwareBitmap.Convert(softwareBitmap, BitmapPixelFormat.Rgba8));
-                        await encoder.FlushAsync();
+                        Images.Clear();
+                        break;
+                    }
 
-                        var bitmapImage = new BitmapImage();
-                        bitmapImage.DecodePixelWidth = width;
-                        bitmapImage.DecodePixelHeight = height;
+                    using (var softwareBitmap = new SoftwareBitmap(BitmapPixelFormat.Gray8, width, height))
+                    {
+                        softwareBitmap.CopyFromBuffer(image.Pixels.AsBuffer());
 
-                        bitmapImage.SetSource(stream);
+                        using (var stream = new InMemoryRandomAccessStream())
+                        {
+                            var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.PngEncoderId, stream);
+                            encoder.SetSoftwareBitmap(SoftwareBitmap.Convert(softwareBitmap, BitmapPixelFormat.Rgba8));
+                            await encoder.FlushAsync();
 
-                        Images.Add(bitmapImage);
+                            var bitmapImage = new BitmapImage();
+                            bitmapImage.DecodePixelWidth = width;
+                            bitmapImage.DecodePixelHeight = height;
+
+                            bitmapImage.SetSource(stream);
+
+                            Images.Add(bitmapImage);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex.ToString());
             }
         }
 

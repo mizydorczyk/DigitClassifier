@@ -7,6 +7,13 @@ namespace DigitClassifier.Helpers
     {
         public IList<Image> Read(ImageCategory category, string labelsPath, string imagesPath)
         {
+            // check if path exists
+            if (!Path.Exists(labelsPath))
+                throw new ArgumentException("Labels path is not valid");
+
+            if (!Path.Exists(imagesPath))
+                throw new ArgumentException("Images path is not valid");
+
             // open FileStream, BinaryReader for labels and get the header
 
             // [offset] [type]          [value]          [description]

@@ -34,18 +34,22 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                    <TextBox x:Name="TrainingLabelsFile"
+                             Style="{StaticResource NoUnderlineTextBoxStyle}"
                              VerticalContentAlignment="Center"
                              Padding="6"
                              BorderThickness="0"
                              CornerRadius="0"
                              TextWrapping="NoWrap"
                              IsSpellCheckEnabled="False"
-                             Text="{x:Bind ViewModel.TrainingLabelsFile}" />
+                             Text="{x:Bind ViewModel.TrainingLabelsFile, Mode=TwoWay}"
+                             TextChanged="TextBox_TextChanged">
+                    </TextBox>
                 </Grid>
 
                 <Grid Grid.Column="1">
-                    <Button CornerRadius="0">
+                    <Button CornerRadius="0" Command="{x:Bind ViewModel.OpenFileCommand}"
+                            CommandParameter="TrainingLabelsFile">
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8E5;" />
                     </Button>
                 </Grid>
@@ -69,18 +73,20 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                    <TextBox x:Name="TrainingImagesFile"
+                             Style="{StaticResource NoUnderlineTextBoxStyle}"
                              VerticalContentAlignment="Center"
                              Padding="6"
                              BorderThickness="0"
                              CornerRadius="0"
                              TextWrapping="NoWrap"
                              IsSpellCheckEnabled="False"
-                             Text="{x:Bind ViewModel.TrainingImagesFile}" />
+                             Text="{x:Bind ViewModel.TrainingImagesFile, Mode=TwoWay}" />
                 </Grid>
 
                 <Grid Grid.Column="1">
-                    <Button CornerRadius="0">
+                    <Button CornerRadius="0" Command="{x:Bind ViewModel.OpenFileCommand}"
+                            CommandParameter="TrainingImagesFile">
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8E5;" />
                     </Button>
                 </Grid>
@@ -104,18 +110,20 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                    <TextBox x:Name="TestLabelsFile"
+                             Style="{StaticResource NoUnderlineTextBoxStyle}"
                              VerticalContentAlignment="Center"
                              Padding="6"
                              BorderThickness="0"
                              CornerRadius="0"
                              TextWrapping="NoWrap"
                              IsSpellCheckEnabled="False"
-                             Text="{x:Bind ViewModel.TestLabelsFile}" />
+                             Text="{x:Bind ViewModel.TestLabelsFile, Mode=TwoWay}" />
                 </Grid>
 
                 <Grid Grid.Column="1">
-                    <Button CornerRadius="0">
+                    <Button CornerRadius="0" Command="{x:Bind ViewModel.OpenFileCommand}"
+                            CommandParameter="TestLabelsFile">
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8E5;" />
                     </Button>
                 </Grid>
@@ -139,18 +147,20 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                    <TextBox x:Name="TestImagesFile"
+                             Style="{StaticResource NoUnderlineTextBoxStyle}"
                              VerticalContentAlignment="Center"
                              Padding="6"
                              BorderThickness="0"
                              CornerRadius="0"
                              TextWrapping="NoWrap"
                              IsSpellCheckEnabled="False"
-                             Text="{x:Bind ViewModel.TestImagesFile}" />
+                             Text="{x:Bind ViewModel.TestImagesFile, Mode=TwoWay}" />
                 </Grid>
 
                 <Grid Grid.Column="1">
-                    <Button CornerRadius="0">
+                    <Button CornerRadius="0" Command="{x:Bind ViewModel.OpenFileCommand}"
+                            CommandParameter="TestImagesFile">
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8E5;" />
                     </Button>
                 </Grid>
@@ -175,18 +185,20 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-                    <TextBox Style="{StaticResource NoUnderlineTextBoxStyle}"
+                    <TextBox x:Name="NetworksFolder"
+                             Style="{StaticResource NoUnderlineTextBoxStyle}"
                              VerticalContentAlignment="Center"
                              Padding="6"
                              BorderThickness="0"
                              CornerRadius="0"
                              TextWrapping="NoWrap"
                              IsSpellCheckEnabled="False"
-                             Text="{x:Bind ViewModel.NetworksFolder}" />
+                             Text="{x:Bind ViewModel.NetworksFolder, Mode=TwoWay}" />
                 </Grid>
 
                 <Grid Grid.Column="1">
-                    <Button CornerRadius="0">
+                    <Button CornerRadius="0" Command="{x:Bind ViewModel.OpenFolderCommand}"
+                            CommandParameter="NetworksFolder">
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xED25;" />
                     </Button>
                 </Grid>

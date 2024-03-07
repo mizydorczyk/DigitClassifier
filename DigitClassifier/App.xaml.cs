@@ -8,6 +8,7 @@ using WinUIEx;
 using Microsoft.UI.Xaml;
 using DigitClassifier.Activation;
 using DigitClassifier.Models;
+using Serilog;
 
 namespace DigitClassifier
 {
@@ -34,6 +35,11 @@ namespace DigitClassifier
             Host = Microsoft.Extensions.Hosting.Host
                 .CreateDefaultBuilder()
                 .UseContentRoot(AppContext.BaseDirectory)
+                .UseSerilog((hostingContext, services, loggerConfiguration) =>
+                {
+                    var path = Path.Combine(Path.GetTempPath(), $"DigitClassfier_{DateTime.UtcNow.ToString("ddMMyyyy_HHmmss")}.log");
+                    loggerConfiguration.WriteTo.File(path);
+                })
                 .ConfigureServices((context, services) =>
                 {
                     // activation handlers
@@ -70,6 +76,13 @@ namespace DigitClassifier
                     // configuration
                     services.Configure<LocalSettingsOptions>(context.Configuration.GetSection(nameof(LocalSettingsOptions)));
                 }).Build();
+
+            UnhandledException += App_UnhandledException;
+        }
+
+        private void App_UnhandledException(object sender, Microsoft.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            Log.Logger.Fatal(e.Exception.ToString());
         }
 
         protected async override void OnLaunched(LaunchActivatedEventArgs args)

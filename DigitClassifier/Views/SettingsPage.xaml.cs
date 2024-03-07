@@ -12,5 +12,10 @@ namespace DigitClassifier.Views
             ViewModel = App.GetService<SettingsViewModel>();
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ViewModel.SettingChangedCommand.Execute(sender);
+        }
     }
 }
