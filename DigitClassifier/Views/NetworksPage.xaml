@@ -6,9 +6,100 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:DigitClassifier.Converters"
     mc:Ignorable="d">
 
-    <Grid x:Name="ContentArea">
+    <Page.Resources>
+        <converters:LayerToStringConverter x:Key="LayerToStringConverter" />
+    </Page.Resources>
 
+    <Grid x:Name="ContentArea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Button Click="Button_Click" HorizontalAlignment="Left" Margin="4,0,0,8">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="0,0,6,1" VerticalAlignment="Center" FontSize="{StaticResource SmallFontSize}"
+                               Text="Create" />
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}"
+                              FontSize="{StaticResource SmallFontSize}" Glyph="&#xE710;" />
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ListView x:Name="NetworksList"
+                      IsItemClickEnabled="True"
+                      SelectionMode="Single"
+                      ItemsSource="{x:Bind ViewModel.Networks}"
+                      SelectedItem="{x:Bind ViewModel.ActiveNetwork}"
+                      ContainerContentChanging="ListView_ContainerContentChanging"
+                      SelectionChanged="ListView_SelectionChanged">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <UserControl PointerEntered="ListViewItemContainer_PointerEntered"
+                                     PointerExited="ListViewItemContainer_PointerExited">
+                            <Grid>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="HoveringStates">
+                                        <VisualState x:Name="HoverButtonsHidden">
+                                            <VisualState.Setters>
+                                                <Setter Target="HoverButton.Visibility" Value="Collapsed" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="HoverButtonsShown">
+                                            <VisualState.Setters>
+                                                <Setter Target="HoverButton.Visibility" Value="Visible" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0"
+                                               FontSize="{StaticResource MediumFontSize}"
+                                               FontFamily="{StaticResource SohoGothicProRegular}"
+                                               Text="{Binding Name}"
+                                               Padding="5,5,5,0" />
+
+                                    <TextBlock Grid.Row="1"
+                                               FontSize="{StaticResource SmallFontSize}"
+                                               Text="{Binding Layers, Converter={StaticResource LayerToStringConverter}}"
+                                               Padding="5" />
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                    <Button x:Name="HoverButton"
+                                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                                            FontSize="{StaticResource LargeFontSize}"
+                                            Content="&#xE74D;"
+                                            Padding="12"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Click="HoverButton_Click"
+                                            IsTabStop="False"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Visibility="Collapsed" />
+                                </Grid>
+                            </Grid>
+                        </UserControl>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

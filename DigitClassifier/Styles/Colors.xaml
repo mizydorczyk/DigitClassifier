@@ -32,4 +32,7 @@
     <SolidColorBrush x:Key="TextControlForeground" Color="#b6bbbb" />
     <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#b6bbbb" />
     <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#b6bbbb" />
+
+    <Color x:Key="SystemAccentColorDark1">#3ec1c7</Color>
+    <Color x:Key="SystemAccentColorLight2">#3ec1c7</Color>
 </ResourceDictionary>

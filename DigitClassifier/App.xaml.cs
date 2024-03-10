@@ -51,6 +51,7 @@ namespace DigitClassifier
                     services.AddSingleton<INavigationService, NavigationService>();
                     services.AddSingleton<IPageService, PageService>();
                     services.AddSingleton<IImagesService, ImagesService>();
+                    services.AddSingleton<INetworksService, NetworksService>();
 
                     services.AddTransient<INavigationViewService, NavigationViewService>();
 

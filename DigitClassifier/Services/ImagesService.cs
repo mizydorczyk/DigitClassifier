@@ -7,7 +7,7 @@ namespace DigitClassifier.Services
     public class ImagesService : IImagesService
     {
         private readonly ILocalSettingsService _localSettingsService;
-        private List<Image> _images;
+        private List<Image>? _images;
 
         public ImagesService(ILocalSettingsService localSettingsService)
         {

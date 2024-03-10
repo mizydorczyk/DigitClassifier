@@ -23,8 +23,8 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <TextBlock Text="Training labels file" Margin="0,2,0,2" />
+            <Grid Grid.Row="0" Margin="0,2,0,2">
+                <TextBlock x:Uid="Settings_TrainingLabelsFile" />
             </Grid>
 
             <Grid Grid.Row="1">
@@ -63,7 +63,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Margin="0,2,0,2">
-                <TextBlock Text="Training images file" />
+                <TextBlock x:Uid="Settings_TrainingImagesFile" />
             </Grid>
 
             <Grid Grid.Row="1">
@@ -81,7 +81,8 @@
                              CornerRadius="0"
                              TextWrapping="NoWrap"
                              IsSpellCheckEnabled="False"
-                             Text="{x:Bind ViewModel.TrainingImagesFile, Mode=TwoWay}" />
+                             Text="{x:Bind ViewModel.TrainingImagesFile, Mode=TwoWay}"
+                             TextChanged="TextBox_TextChanged" />
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -100,7 +101,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Margin="0,2,0,2">
-                <TextBlock Text="Test labels file" />
+                <TextBlock x:Uid="Settings_TestLabelsFile" />
             </Grid>
 
             <Grid Grid.Row="1">
@@ -118,7 +119,8 @@
                              CornerRadius="0"
                              TextWrapping="NoWrap"
                              IsSpellCheckEnabled="False"
-                             Text="{x:Bind ViewModel.TestLabelsFile, Mode=TwoWay}" />
+                             Text="{x:Bind ViewModel.TestLabelsFile, Mode=TwoWay}"
+                             TextChanged="TextBox_TextChanged" />
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -137,7 +139,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Margin="0,2,0,2">
-                <TextBlock Text="Test images file" />
+                <TextBlock x:Uid="Settings_TestImagesFile" />
             </Grid>
 
             <Grid Grid.Row="1">
@@ -155,7 +157,8 @@
                              CornerRadius="0"
                              TextWrapping="NoWrap"
                              IsSpellCheckEnabled="False"
-                             Text="{x:Bind ViewModel.TestImagesFile, Mode=TwoWay}" />
+                             Text="{x:Bind ViewModel.TestImagesFile, Mode=TwoWay}"
+                             TextChanged="TextBox_TextChanged" />
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -175,7 +178,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0" Margin="0,2,0,2">
-                <TextBlock Text="Networks folder" />
+                <TextBlock x:Uid="Settings_NetworksFolder" />
             </Grid>
 
             <Grid Grid.Row="1">
@@ -193,7 +196,8 @@
                              CornerRadius="0"
                              TextWrapping="NoWrap"
                              IsSpellCheckEnabled="False"
-                             Text="{x:Bind ViewModel.NetworksFolder, Mode=TwoWay}" />
+                             Text="{x:Bind ViewModel.NetworksFolder, Mode=TwoWay}"
+                             TextChanged="TextBox_TextChanged" />
                 </Grid>
 
                 <Grid Grid.Column="1">

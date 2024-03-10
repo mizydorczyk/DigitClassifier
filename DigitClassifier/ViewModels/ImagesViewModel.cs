@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using DigitClassifier.Helpers;
 using DigitClassifier.Interfaces;
 using DigitClassifier.Models;
 using Microsoft.UI.Xaml.Controls;
@@ -27,7 +26,7 @@ namespace DigitClassifier.ViewModels
 
         private Func<Models.Image, bool>? _categoryFilter;
         private Func<Models.Image, bool>? _labelsFilter;
-        private CancellationTokenSource _loadingCancellationToken;
+        private CancellationTokenSource? _loadingCancellationToken;
 
         public ImagesViewModel(IImagesService imagesService)
         {
@@ -39,7 +38,7 @@ namespace DigitClassifier.ViewModels
 
         public void OnNavigatedFrom()
         {
-            _loadingCancellationToken.Cancel();
+            _loadingCancellationToken?.Cancel();
         }
 
         public async void OnNavigatedTo(object parameter)

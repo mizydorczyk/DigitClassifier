@@ -4,24 +4,30 @@ namespace NeuralNetwork
 {
     public class Network
     {
-        private readonly Layer[] _layers;
+        public string Name { get; set; }
+        public Layer[] Layers { get; private set; }
 
-        public Network(int[] layerSizes, IActivationFunction activationFunction)
+        public Network(Layer[] layers)
         {
-            _layers = new Layer[layerSizes.Length - 1];
+            Layers = layers;
+        }
 
-            for (int i = 0; i < _layers.Length; i++)
+        public Network(int[] layerSizes, ActivationFunctionType activationFunctionType)
+        {
+            Layers = new Layer[layerSizes.Length - 1];
+
+            for (int i = 0; i < Layers.Length; i++)
             {
-                _layers[i] = new Layer(layerSizes[i], layerSizes[i + 1], activationFunction);
+                Layers[i] = new Layer(layerSizes[i], layerSizes[i + 1], activationFunctionType);
             }
         }
 
         public double[] Calculate(double[] inputs)
         {
             // calculate each consecutively
-            for (int i = 0; i < _layers.Length; i++)
+            for (int i = 0; i < Layers.Length; i++)
             {
-                inputs = _layers[i].Calculate(inputs);
+                inputs = Layers[i].Calculate(inputs);
             }
 
             return inputs;

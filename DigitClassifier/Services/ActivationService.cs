@@ -57,7 +57,8 @@ namespace DigitClassifier.Services
                 "TrainingImagesFile",
                 "TrainingLabelsFile",
                 "TestImagesFile",
-                "TestLabelsFile"
+                "TestLabelsFile",
+                "NetworksFolder"
             };
 
             foreach (var option in options)
@@ -71,6 +72,7 @@ namespace DigitClassifier.Services
                         "TrainingLabelsFile" => Path.Combine(root, @"Assets\train-labels.idx1-ubyte"),
                         "TestImagesFile" => Path.Combine(root, @"Assets\t10k-images.idx3-ubyte"),
                         "TestLabelsFile" => Path.Combine(root, @"Assets\t10k-labels.idx1-ubyte"),
+                        "NetworksFolder" => Path.Combine(root, @"Assets\Networks"),
                         _ => string.Empty
                     };
 

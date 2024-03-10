@@ -120,6 +120,21 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Digit Classifier</value>
   </data>
+  <data name="Settings_NetworksFolder.Text" xml:space="preserve">
+    <value>Networks folder</value>
+  </data>
+  <data name="Settings_TestImagesFile.Text" xml:space="preserve">
+    <value>Test images file</value>
+  </data>
+  <data name="Settings_TestLabelsFile.Text" xml:space="preserve">
+    <value>Test labels file</value>
+  </data>
+  <data name="Settings_TrainingImagesFile.Text" xml:space="preserve">
+    <value>Training images file</value>
+  </data>
+  <data name="Settings_TrainingLabelsFile.Text" xml:space="preserve">
+    <value>Training labels file</value>
+  </data>
   <data name="Shell_Drawing.Content" xml:space="preserve">
     <value>Drawing</value>
   </data>
