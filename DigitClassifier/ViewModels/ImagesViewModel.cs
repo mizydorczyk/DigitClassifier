@@ -48,8 +48,9 @@ namespace DigitClassifier.ViewModels
 
         private async Task LoadImages(bool refresh = false)
         {
-            _loadingCancellationToken?.Cancel();
+            Images.Clear();
 
+            _loadingCancellationToken?.Cancel();
             _loadingCancellationToken = new CancellationTokenSource();
             var loadingCancellationToken = _loadingCancellationToken.Token;
 
@@ -112,7 +113,6 @@ namespace DigitClassifier.ViewModels
                     else
                         _categoryFilter = new Func<Models.Image, bool>(x => x.Category.ToString() == (string)selectionChangedEventArgs.AddedItems[0]);
 
-                    Images.Clear();
                     await LoadImages();
                 }
             }
@@ -129,7 +129,6 @@ namespace DigitClassifier.ViewModels
                     else
                         _labelsFilter = new Func<Models.Image, bool>(x => x.Label.ToString() == (string)selectionChangedEventArgs.AddedItems[0]);
 
-                    Images.Clear();
                     await LoadImages();
                 }
             }

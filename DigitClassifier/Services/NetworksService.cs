@@ -23,6 +23,9 @@ namespace DigitClassifier.Services
                 if (_networks == null)
                     throw new Exception("Load networks before trying to retrieve them");
 
+                if (_networks.Count == 0)
+                    return null;
+
                 var network = _networks.FirstOrDefault(x => x.Name == _activeNetworkName);
 
                 return network ?? _networks.First();

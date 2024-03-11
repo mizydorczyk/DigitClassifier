@@ -1,10 +1,11 @@
 ﻿using NeuralNetwork.Interfaces;
+using System.Text.Json.Serialization;
 
 namespace NeuralNetwork
 {
     public class Network
     {
-        public string Name { get; set; }
+        [JsonIgnore] public string Name { get; set; }
         public Layer[] Layers { get; private set; }
 
         public Network(Layer[] layers)

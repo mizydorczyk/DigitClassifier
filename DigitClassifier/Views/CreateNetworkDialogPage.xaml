@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Page
+    x:Class="DigitClassifier.Views.CreateNetworkDialogPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DigitClassifier.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,5,0,2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" Text="Layers:" />
+
+            <TextBox x:Name="Layers"
+                     Grid.Column="1"
+                     PlaceholderText="eg. 784, 10"
+                     Style="{StaticResource NoUnderlineTextBoxStyle}"
+                     VerticalContentAlignment="Center"
+                     Padding="6"
+                     BorderThickness="0"
+                     CornerRadius="0"
+                     TextWrapping="NoWrap"
+                     IsSpellCheckEnabled="False"
+                     TextChanged="Layers_TextChanged" />
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0,2,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="0,0,10,0" Text="Acitvation function:" />
+
+            <ComboBox x:Name="ActivationFunction" Grid.Column="1" HorizontalAlignment="Stretch" SelectedIndex="0" />
+        </Grid>
+    </Grid>
+</Page>

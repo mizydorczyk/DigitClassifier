@@ -15,6 +15,7 @@ namespace DigitClassifier.ViewModels
         public ObservableCollection<Network> Networks { get; private set; } = new ObservableCollection<Network>();
         public ICommand ItemSelectedCommand { get; }
         public ICommand ItemDeletedCommand { get; }
+        public ICommand ItemCreatedCommand { get; }
         private CancellationTokenSource? _loadingCancellationToken;
 
         [ObservableProperty] Network _activeNetwork;
@@ -25,6 +26,18 @@ namespace DigitClassifier.ViewModels
 
             ItemSelectedCommand = new RelayCommand<object>(OnItemSelected);
             ItemDeletedCommand = new RelayCommand<object>(OnItemDeleted);
+            ItemCreatedCommand = new RelayCommand<object>(OnItemCreated);
+        }
+
+        private async void OnItemCreated(object args)
+        {
+            var network = (Network)args;
+
+            if (network == null)
+                return;
+
+            await _networksService.SaveNetworkAsync(network);
+            await LoadNetworks(true);
         }
 
         public void OnNavigatedFrom()
@@ -39,8 +52,9 @@ namespace DigitClassifier.ViewModels
 
         private async Task LoadNetworks(bool refresh = false)
         {
-            _loadingCancellationToken?.Cancel();
+            Networks.Clear();
 
+            _loadingCancellationToken?.Cancel();
             _loadingCancellationToken = new CancellationTokenSource();
             var loadingCancellationToken = _loadingCancellationToken.Token;
 
@@ -85,7 +99,6 @@ namespace DigitClassifier.ViewModels
             var deletedItem = (Network)button.DataContext;
 
             await _networksService.DeleteNetworkAsync(deletedItem);
-            Networks.Clear();
             await LoadNetworks(true);
         }
     }

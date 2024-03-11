@@ -46,6 +46,9 @@
         <None Update="appsettings.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+        <Page Update="Views\CreateNetworkDialogPage.xaml">
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
     </ItemGroup>
 
     <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
@@ -54,5 +57,9 @@
 
     <ItemGroup>
         <PRIResource Remove="Assets\Networks\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Views\CreateNetworkDialogPage.xaml"/>
     </ItemGroup>
 </Project>
