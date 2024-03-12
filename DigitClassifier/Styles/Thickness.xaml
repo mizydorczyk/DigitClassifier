@@ -4,5 +4,5 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Thickness x:Key="NavigationViewPageContentMargin">12,18,12,0</Thickness>
-    <Thickness x:Key="NavigationViewItemPadding">0,10,0,12</Thickness>
+    <Thickness x:Key="NavigationViewItemPadding">0,12,0,10</Thickness>
 </ResourceDictionary>

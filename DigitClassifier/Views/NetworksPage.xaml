@@ -71,14 +71,14 @@
 
                                     <TextBlock Grid.Row="0"
                                                FontSize="{StaticResource MediumFontSize}"
-                                               FontFamily="{StaticResource SohoGothicProRegular}"
+                                               FontFamily="{StaticResource ApplicationRegularFont}"
                                                Text="{Binding Name}"
-                                               Padding="5,5,5,0" />
+                                               Padding="5,10,5,0" />
 
                                     <TextBlock Grid.Row="1"
                                                FontSize="{StaticResource SmallFontSize}"
                                                Text="{Binding Layers, Converter={StaticResource LayerToStringConverter}}"
-                                               Padding="5" />
+                                               Padding="5,2,5,10" />
                                 </Grid>
 
                                 <Grid Grid.Column="1">

@@ -3,6 +3,6 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <FontFamily x:Key="SohoGothicProMedium">/Assets/Fonts/SohoGothicPro-Medium.ttf#Soho Gothic Pro</FontFamily>
-    <FontFamily x:Key="SohoGothicProRegular">/Assets/Fonts/SohoGothicPro-Regular.ttf#Soho Gothic Pro</FontFamily>
+    <FontFamily x:Key="ApplicationBoldFont">/Assets/Fonts/NotoSansGurmukhi-Bold.ttf#Noto Sans Gurmukhi</FontFamily>
+    <FontFamily x:Key="ApplicationRegularFont">/Assets/Fonts/NotoSansGurmukhi-Regular.ttf#Noto Sans Gurmukhi</FontFamily>
 </ResourceDictionary>

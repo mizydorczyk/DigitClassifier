@@ -60,6 +60,8 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Remove="Assets\Fonts\NotoSansGurmukhi-Bold.ttf"/>
+        <None Remove="Assets\Fonts\NotoSansGurmukhi-Regular.ttf"/>
         <None Remove="Views\CreateNetworkDialogPage.xaml"/>
     </ItemGroup>
 </Project>
