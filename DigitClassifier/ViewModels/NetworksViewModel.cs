@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DigitClassifier.Interfaces;
+using DigitClassifier.Services;
 using Microsoft.UI.Xaml.Controls;
 using NeuralNetwork;
 using Serilog;
@@ -12,6 +13,8 @@ namespace DigitClassifier.ViewModels
     public partial class NetworksViewModel : ObservableRecipient, INavigationAware
     {
         private readonly INetworksService _networksService;
+        private readonly INotificationService _notificationService;
+
         public ObservableCollection<Network> Networks { get; private set; } = new();
         public ICommand ItemSelectedCommand { get; }
         public ICommand ItemDeletedCommand { get; }
@@ -20,9 +23,10 @@ namespace DigitClassifier.ViewModels
 
         [ObservableProperty] Network _activeNetwork;
 
-        public NetworksViewModel(INetworksService networksService)
+        public NetworksViewModel(INetworksService networksService, INotificationService notificationService)
         {
             _networksService = networksService;
+            _notificationService = notificationService;
 
             ItemSelectedCommand = new RelayCommand<ListView>(OnItemSelected);
             ItemDeletedCommand = new RelayCommand<Button>(OnItemDeleted);
@@ -66,6 +70,7 @@ namespace DigitClassifier.ViewModels
             catch (Exception ex)
             {
                 Log.Logger.Error(ex.ToString());
+                await _notificationService.ShowAsync(ex.Message, InfoBarSeverity.Error);
             }
         }
 
@@ -85,8 +90,16 @@ namespace DigitClassifier.ViewModels
         {
             var deletedItem = (Network)button.DataContext;
 
-            await _networksService.DeleteNetworkAsync(deletedItem);
-            await LoadNetworks(true);
+            try
+            {
+                await _networksService.DeleteNetworkAsync(deletedItem);
+                await LoadNetworks(true);
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex.ToString());
+                await _notificationService.ShowAsync(ex.Message, InfoBarSeverity.Error);
+            }
         }
 
         private async void OnItemCreated(Network network)
@@ -94,8 +107,16 @@ namespace DigitClassifier.ViewModels
             if (network == null)
                 return;
 
-            await _networksService.SaveNetworkAsync(network);
-            await LoadNetworks(true);
+            try
+            {
+                await _networksService.SaveNetworkAsync(network);
+                await LoadNetworks(true);
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error(ex.ToString());
+                await _notificationService.ShowAsync(ex.Message, InfoBarSeverity.Error);
+            }
         }
     }
 }

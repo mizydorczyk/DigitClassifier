@@ -14,6 +14,7 @@ namespace DigitClassifier.Views
             InitializeComponent();
 
             ViewModel.NavigationService.Frame = NavigationFrame;
+            ViewModel.NotificationService.Initialize(ApplicationInfoBar);
             ViewModel.NavigationViewService.Initialize(NavigationViewControl);
 
             App.MainWindow.ExtendsContentIntoTitleBar = true;

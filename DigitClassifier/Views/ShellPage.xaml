@@ -102,6 +102,20 @@
                     </Grid>
                 </NavigationView.Content>
             </NavigationView>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <InfoBar x:Name="ApplicationInfoBar"
+                             Visibility="Visible"
+                             IsOpen="False"
+                             Opacity="0"
+                             IsClosable="False" />
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 </Page>

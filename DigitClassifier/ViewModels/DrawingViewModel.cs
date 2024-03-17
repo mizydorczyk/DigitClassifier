@@ -5,19 +5,21 @@ using DigitClassifier.Models;
 using Serilog;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Microsoft.UI.Xaml.Controls;
 
 namespace DigitClassifier.ViewModels
 {
     public partial class DrawingViewModel : ObservableRecipient, INavigationAware
     {
         private readonly INetworksService _networksService;
+        private readonly INotificationService _notificationService;
         public ObservableCollection<CalculatedResult> CalculatedResults = new();
         public ICommand DrawingChangedCommand { get; }
 
-        public DrawingViewModel(INetworksService networksService)
+        public DrawingViewModel(INetworksService networksService, INotificationService notificationService)
         {
             _networksService = networksService;
-
+            _notificationService = notificationService;
             DrawingChangedCommand = new RelayCommand<double[]>(OnDrawingChangedCommand);
         }
 
@@ -58,6 +60,7 @@ namespace DigitClassifier.ViewModels
             catch (Exception ex)
             {
                 Log.Logger.Error(ex.ToString());
+                await _notificationService.ShowAsync(ex.Message, InfoBarSeverity.Error);
             }
         }
     }

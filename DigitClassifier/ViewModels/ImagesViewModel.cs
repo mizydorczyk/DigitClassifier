@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DigitClassifier.Interfaces;
+using DigitClassifier.Services;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Serilog;
@@ -15,6 +16,7 @@ namespace DigitClassifier.ViewModels
     public partial class ImagesViewModel : ObservableRecipient, INavigationAware
     {
         private readonly IImagesService _imagesService;
+        private readonly INotificationService _notificationService;
 
         public ObservableCollection<BitmapImage> Images { get; private set; } = new();
         public ICommand CategorySelectionChangedCommand { get; }
@@ -24,9 +26,10 @@ namespace DigitClassifier.ViewModels
         private Func<Models.Image, bool>? _labelsFilter;
         private CancellationTokenSource? _loadingCancellationToken;
 
-        public ImagesViewModel(IImagesService imagesService)
+        public ImagesViewModel(IImagesService imagesService, INotificationService notificationService)
         {
             _imagesService = imagesService;
+            _notificationService = notificationService;
 
             CategorySelectionChangedCommand = new RelayCommand<SelectionChangedEventArgs>(OnCategorySelectionChanged);
             LabelsSelectionChangedCommand = new RelayCommand<SelectionChangedEventArgs>(OnLabelsSelectionChanged);
@@ -95,6 +98,7 @@ namespace DigitClassifier.ViewModels
             catch (Exception ex)
             {
                 Log.Logger.Error(ex.ToString());
+                await _notificationService.ShowAsync(ex.Message, InfoBarSeverity.Error);
             }
         }
 
