@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using DigitClassifier.Interfaces;
 using Microsoft.UI.Xaml.Controls;
 using System.Windows.Input;
-using System.Xml.Linq;
 using Windows.Storage.Pickers;
 
 namespace DigitClassifier.ViewModels
@@ -24,9 +23,9 @@ namespace DigitClassifier.ViewModels
         {
             _localSettingsService = localSettingsService;
 
-            SettingChangedCommand = new RelayCommand<object>(OnSettingChangedCommand);
-            OpenFolderCommand = new RelayCommand<object>(OnOpenFolderCommand);
-            OpenFileCommand = new RelayCommand<object>(OnOpenFileCommand);
+            SettingChangedCommand = new RelayCommand<TextBox>(OnSettingChangedCommand);
+            OpenFolderCommand = new RelayCommand<string>(OnOpenFolderCommand);
+            OpenFileCommand = new RelayCommand<string>(OnOpenFileCommand);
         }
 
         public void OnNavigatedFrom()
@@ -48,28 +47,21 @@ namespace DigitClassifier.ViewModels
             NetworksFolder = await _localSettingsService.ReadSettingAsync<string>("NetworksFolder");
         }
 
-        private async void OnSettingChangedCommand(object args)
+        private async void OnSettingChangedCommand(TextBox textBox)
         {
-            if (args is TextBox)
-            {
-                var textBox = args as TextBox;
+            if (textBox == null)
+                return;
 
-                if (textBox == null)
-                    return;
+            var name = textBox.Name;
+            var value = textBox.Text;
 
-                var name = textBox.Name;
-                var value = textBox.Text;
-
-                await _localSettingsService.SaveSettingAsync(name, value);
-            }
+            await _localSettingsService.SaveSettingAsync(name, value);
         }
 
-        private async void OnOpenFolderCommand(object args)
+        private async void OnOpenFolderCommand(string setting)
         {
-            if (args is null or not string)
-            {
+            if (string.IsNullOrEmpty(setting))
                 return;
-            }
 
             var openPicker = new FolderPicker();
             var window = App.MainWindow;
@@ -81,17 +73,15 @@ namespace DigitClassifier.ViewModels
 
             if (folder != null)
             {
-                await _localSettingsService.SaveSettingAsync((string)args, folder.Path);
+                await _localSettingsService.SaveSettingAsync(setting, folder.Path);
                 await LoadSettings();
             }
         }
 
-        private async void OnOpenFileCommand(object args)
+        private async void OnOpenFileCommand(string setting)
         {
-            if (args is null or not string)
-            {
+            if (string.IsNullOrEmpty(setting))
                 return;
-            }
 
             var openPicker = new FileOpenPicker();
             var window = App.MainWindow;
@@ -103,7 +93,7 @@ namespace DigitClassifier.ViewModels
 
             if (file != null)
             {
-                await _localSettingsService.SaveSettingAsync((string)args, file.Path);
+                await _localSettingsService.SaveSettingAsync(setting, file.Path);
                 await LoadSettings();
             }
         }

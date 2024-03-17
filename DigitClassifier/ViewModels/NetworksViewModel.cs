@@ -12,7 +12,7 @@ namespace DigitClassifier.ViewModels
     public partial class NetworksViewModel : ObservableRecipient, INavigationAware
     {
         private readonly INetworksService _networksService;
-        public ObservableCollection<Network> Networks { get; private set; } = new ObservableCollection<Network>();
+        public ObservableCollection<Network> Networks { get; private set; } = new();
         public ICommand ItemSelectedCommand { get; }
         public ICommand ItemDeletedCommand { get; }
         public ICommand ItemCreatedCommand { get; }
@@ -24,20 +24,9 @@ namespace DigitClassifier.ViewModels
         {
             _networksService = networksService;
 
-            ItemSelectedCommand = new RelayCommand<object>(OnItemSelected);
-            ItemDeletedCommand = new RelayCommand<object>(OnItemDeleted);
-            ItemCreatedCommand = new RelayCommand<object>(OnItemCreated);
-        }
-
-        private async void OnItemCreated(object args)
-        {
-            var network = (Network)args;
-
-            if (network == null)
-                return;
-
-            await _networksService.SaveNetworkAsync(network);
-            await LoadNetworks(true);
+            ItemSelectedCommand = new RelayCommand<ListView>(OnItemSelected);
+            ItemDeletedCommand = new RelayCommand<Button>(OnItemDeleted);
+            ItemCreatedCommand = new RelayCommand<Network>(OnItemCreated);
         }
 
         public void OnNavigatedFrom()
@@ -80,9 +69,8 @@ namespace DigitClassifier.ViewModels
             }
         }
 
-        private void OnItemSelected(object args)
+        private void OnItemSelected(ListView listView)
         {
-            var listView = (ListView)args;
             var selectedItem = listView.SelectedItem;
 
             if (selectedItem is Network)
@@ -93,12 +81,20 @@ namespace DigitClassifier.ViewModels
             ActiveNetwork = _networksService.ActiveNetwork;
         }
 
-        private async void OnItemDeleted(object args)
+        private async void OnItemDeleted(Button button)
         {
-            var button = (Button)args;
             var deletedItem = (Network)button.DataContext;
 
             await _networksService.DeleteNetworkAsync(deletedItem);
+            await LoadNetworks(true);
+        }
+
+        private async void OnItemCreated(Network network)
+        {
+            if (network == null)
+                return;
+
+            await _networksService.SaveNetworkAsync(network);
             await LoadNetworks(true);
         }
     }

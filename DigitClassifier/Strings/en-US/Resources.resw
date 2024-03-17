@@ -120,6 +120,15 @@
   <data name="ApplicationTitle" xml:space="preserve">
     <value>Digit Classifier</value>
   </data>
+  <data name="Drawing_Instructions.Text" xml:space="preserve">
+    <value>LMB: Draw | C: Clear</value>
+  </data>
+  <data name="Images_Category.Text" xml:space="preserve">
+    <value>Category:</value>
+  </data>
+  <data name="Images_Labels.Text" xml:space="preserve">
+    <value>Labels:</value>
+  </data>
   <data name="Settings_NetworksFolder.Text" xml:space="preserve">
     <value>Networks folder</value>
   </data>

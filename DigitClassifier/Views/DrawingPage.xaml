@@ -6,9 +6,62 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    xmlns:converters="using:DigitClassifier.Converters"
+    mc:Ignorable="d"
+    KeyboardAcceleratorPlacementMode="Hidden">
+
+    <Page.Resources>
+        <converters:CalculatedResultsToStringConverter x:Key="CalculatedResultsToStringConverter" />
+    </Page.Resources>
 
     <Grid x:Name="ContentArea">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
 
+        <Grid Grid.Column="0" Margin="5,5,5,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" SizeChanged="DrawingControl_Grid_SizeChanged">
+                <canvas:CanvasControl x:Name="DrawingControl"
+                                      Draw="DrawingControl_Draw"
+                                      VerticalAlignment="Top"
+                                      HorizontalAlignment="Left"
+                                      SizeChanged="DrawingControl_SizeChanged"
+                                      CreateResources="DrawingControl_CreateResources"
+                                      PointerPressed="DrawingControl_PointerPressed"
+                                      PointerMoved="DrawingControl_PointerMoved"
+                                      PointerReleased="DrawingControl_PointerReleased"
+                                      PointerExited="DrawingControl_PointerExited" />
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <TextBlock x:Uid="Drawing_Instructions" Margin="0,2,0,0" Foreground="#b6bbbb"
+                           FontSize="{StaticResource SmallFontSize}" HorizontalAlignment="Center" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="10,5,5,20">
+            <ItemsView IsItemInvokedEnabled="False"
+                       SelectionMode="None"
+                       ItemsSource="{x:Bind ViewModel.CalculatedResults}">
+                <ItemsView.ItemTemplate>
+                    <DataTemplate>
+                        <ItemContainer>
+                            <TextBlock FontFamily="{StaticResource ApplicationRegularFont}"
+                                       FontSize="{StaticResource MediumFontSize}"
+                                       Margin="4,8,4,8"
+                                       HorizontalTextAlignment="Left"
+                                       Text="{Binding Converter={StaticResource CalculatedResultsToStringConverter}}" />
+                        </ItemContainer>
+                    </DataTemplate>
+                </ItemsView.ItemTemplate>
+            </ItemsView>
+        </Grid>
     </Grid>
 </Page>

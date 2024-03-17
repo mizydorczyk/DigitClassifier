@@ -34,7 +34,7 @@ namespace DigitClassifier.Views
 
         private async void HoverButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentDialog dialog = new ContentDialog
+            var dialog = new ContentDialog
             {
                 XamlRoot = XamlRoot,
                 Title = "Delete the network permanently?",
@@ -55,7 +55,7 @@ namespace DigitClassifier.Views
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var createNetworkDialogPage = new CreateNetworkDialogPage();
-            ContentDialog dialog = new ContentDialog
+            var dialog = new ContentDialog
             {
                 XamlRoot = XamlRoot,
                 Title = "Create new network",

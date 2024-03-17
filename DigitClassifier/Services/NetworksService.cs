@@ -20,10 +20,7 @@ namespace DigitClassifier.Services
         {
             get
             {
-                if (_networks == null)
-                    throw new Exception("Load networks before trying to retrieve them");
-
-                if (_networks.Count == 0)
+                if (_networks == null || _networks.Count == 0)
                     return null;
 
                 var network = _networks.FirstOrDefault(x => x.Name == _activeNetworkName);
@@ -103,14 +100,22 @@ namespace DigitClassifier.Services
         public async Task SaveNetworkAsync(Network network)
         {
             var option = "NetworksFolder";
-            var path = await _localSettingsService.ReadSettingAsync<string>(option) ?? throw new Exception($"The setting for the key: {option} was not found");
+            var folder = await _localSettingsService.ReadSettingAsync<string>(option) ??
+                         throw new Exception($"The setting for the key: {option} was not found");
 
-            if (!Path.Exists(path) || File.GetAttributes(path) != FileAttributes.Directory)
+            if (!Path.Exists(folder))
+                Directory.CreateDirectory(folder);
+
+            if (Path.Exists(folder) && File.GetAttributes(folder) != FileAttributes.Directory)
                 throw new ArgumentException("Networks folder path is not valid");
 
-            var fileName = $"DigitClassifier_Network_{DateTime.UtcNow.ToString("ddMMyyyy_HHmmss")}.json";
+            var fileName = (File.Exists(Path.Combine(folder, $"{network.Name}.json"))) switch
+            {
+                true => $"{network.Name}.json",
+                false => $"DigitClassifier_Network_{DateTime.UtcNow.ToString("ddMMyyyy_HHmmss")}.json"
+            };
 
-            using var stream = File.Create(Path.Combine(path, fileName));
+            using var stream = File.Open(Path.Combine(folder, fileName), FileMode.OpenOrCreate);
             await JsonSerializer.SerializeAsync(stream, network);
         }
     }
