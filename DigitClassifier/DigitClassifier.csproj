@@ -26,13 +26,14 @@
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2"/>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0"/>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002"/>
-        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755"/>
+        <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0"/>
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000"/>
+        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.3233"/>
         <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9"/>
         <PackageReference Include="Serilog" Version="3.1.1"/>
         <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0"/>
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.0"/>
-        <PackageReference Include="WinUIEx" Version="2.3.3"/>
+        <PackageReference Include="WinUIEx" Version="2.3.4"/>
         <Manifest Include="$(ApplicationManifest)"/>
     </ItemGroup>
 
@@ -46,22 +47,9 @@
         <None Update="appsettings.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-        <Page Update="Views\CreateNetworkDialogPage.xaml">
-            <Generator>MSBuild:Compile</Generator>
-        </Page>
     </ItemGroup>
 
     <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
         <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PRIResource Remove="Assets\Networks\**"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Remove="Assets\Fonts\NotoSansGurmukhi-Bold.ttf"/>
-        <None Remove="Assets\Fonts\NotoSansGurmukhi-Regular.ttf"/>
-        <None Remove="Views\CreateNetworkDialogPage.xaml"/>
-    </ItemGroup>
 </Project>
