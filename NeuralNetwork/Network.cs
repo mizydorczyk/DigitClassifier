@@ -21,6 +21,8 @@ namespace NeuralNetwork
             {
                 Layers[i] = new Layer(layerSizes[i], layerSizes[i + 1], activationFunctionType);
             }
+
+            InitializeRandomValues(new Random());
         }
 
         public double[] Calculate(double[] inputs)
@@ -32,6 +34,14 @@ namespace NeuralNetwork
             }
 
             return inputs;
+        }
+
+        public void InitializeRandomValues(Random random)
+        {
+            for (int i = 0; i < Layers.Length; i++)
+            {
+                Layers[i].InitializeRandomValues(random);
+            }
         }
     }
 }

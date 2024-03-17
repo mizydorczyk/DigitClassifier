@@ -64,5 +64,18 @@ namespace NeuralNetwork
 
             return activations;
         }
+
+        public void InitializeRandomValues(Random random)
+        {
+            for (int i = 0; i < Weights.Length; i++)
+            {
+                // random in normal distribution
+                double a = 1 - random.NextDouble();
+                double b = 1 - random.NextDouble();
+                double c = Math.Sqrt(-2.0 * Math.Log(a)) * Math.Cos(2.0 * Math.PI * b);
+
+                Weights[i] = c / Math.Sqrt(NumberOfNodesIn);
+            }
+        }
     }
 }
