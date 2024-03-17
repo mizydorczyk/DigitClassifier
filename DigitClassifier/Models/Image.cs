@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace DigitClassifier.Models
+﻿namespace DigitClassifier.Models
 {
     public class Image
     {

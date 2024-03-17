@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DigitClassifier.Interfaces;
-using DigitClassifier.Models;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Serilog;
@@ -17,12 +16,9 @@ namespace DigitClassifier.ViewModels
     {
         private readonly IImagesService _imagesService;
 
-        public ObservableCollection<BitmapImage> Images { get; private set; } = new ObservableCollection<BitmapImage>();
+        public ObservableCollection<BitmapImage> Images { get; private set; } = new();
         public ICommand CategorySelectionChangedCommand { get; }
         public ICommand LabelsSelectionChangedCommand { get; }
-
-        [ObservableProperty] private ImageCategory? _selectedCategory = null;
-        [ObservableProperty] private int? _selectedLabel = null;
 
         private Func<Models.Image, bool>? _categoryFilter;
         private Func<Models.Image, bool>? _labelsFilter;
@@ -32,8 +28,8 @@ namespace DigitClassifier.ViewModels
         {
             _imagesService = imagesService;
 
-            CategorySelectionChangedCommand = new RelayCommand<object>(OnCategorySelectionChanged);
-            LabelsSelectionChangedCommand = new RelayCommand<object>(OnLabelsSelectionChanged);
+            CategorySelectionChangedCommand = new RelayCommand<SelectionChangedEventArgs>(OnCategorySelectionChanged);
+            LabelsSelectionChangedCommand = new RelayCommand<SelectionChangedEventArgs>(OnLabelsSelectionChanged);
         }
 
         public void OnNavigatedFrom()
@@ -102,35 +98,29 @@ namespace DigitClassifier.ViewModels
             }
         }
 
-        private async void OnCategorySelectionChanged(object args)
+        private async void OnCategorySelectionChanged(SelectionChangedEventArgs selectionChangedEventArgs)
         {
-            if (args is SelectionChangedEventArgs selectionChangedEventArgs)
+            if (!string.IsNullOrEmpty((string)selectionChangedEventArgs.AddedItems[0]))
             {
-                if (!string.IsNullOrEmpty((string)selectionChangedEventArgs.AddedItems[0]))
-                {
-                    if ((string)selectionChangedEventArgs.AddedItems[0] == "All")
-                        _categoryFilter = null;
-                    else
-                        _categoryFilter = new Func<Models.Image, bool>(x => x.Category.ToString() == (string)selectionChangedEventArgs.AddedItems[0]);
+                if ((string)selectionChangedEventArgs.AddedItems[0] == "All")
+                    _categoryFilter = null;
+                else
+                    _categoryFilter = new Func<Models.Image, bool>(x => x.Category.ToString() == (string)selectionChangedEventArgs.AddedItems[0]);
 
-                    await LoadImages();
-                }
+                await LoadImages();
             }
         }
 
-        private async void OnLabelsSelectionChanged(object args)
+        private async void OnLabelsSelectionChanged(SelectionChangedEventArgs selectionChangedEventArgs)
         {
-            if (args is SelectionChangedEventArgs selectionChangedEventArgs)
+            if (!string.IsNullOrEmpty((string)selectionChangedEventArgs.AddedItems[0]))
             {
-                if (!string.IsNullOrEmpty((string)selectionChangedEventArgs.AddedItems[0]))
-                {
-                    if ((string)selectionChangedEventArgs.AddedItems[0] == "All")
-                        _labelsFilter = null;
-                    else
-                        _labelsFilter = new Func<Models.Image, bool>(x => x.Label.ToString() == (string)selectionChangedEventArgs.AddedItems[0]);
+                if ((string)selectionChangedEventArgs.AddedItems[0] == "All")
+                    _labelsFilter = null;
+                else
+                    _labelsFilter = new Func<Models.Image, bool>(x => x.Label.ToString() == (string)selectionChangedEventArgs.AddedItems[0]);
 
-                    await LoadImages();
-                }
+                await LoadImages();
             }
         }
     }

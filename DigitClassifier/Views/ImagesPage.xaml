@@ -6,7 +6,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:converters="using:DigitClassifier.Converters"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:c="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d">
@@ -15,7 +14,6 @@
         <DataTemplate x:Key='ImageTemplate'>
             <Image Source="{Binding}" Width="56" Height="56" />
         </DataTemplate>
-        <converters:NullToAllConverter x:Key="NullToAllConverter" />
     </Page.Resources>
 
     <Grid x:Name="ContentArea">
@@ -33,12 +31,12 @@
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="0" Margin="0,10,0,10">
-                <TextBlock VerticalAlignment="Center" FontSize="{StaticResource SmallFontSize}">Category:</TextBlock>
+                <TextBlock x:Uid="Images_Category" VerticalAlignment="Center" FontSize="{StaticResource SmallFontSize}" />
             </Grid>
 
             <Grid Grid.Column="1" Margin="10,10,10,10">
                 <ComboBox VerticalAlignment="Center"
-                          SelectedItem="{x:Bind ViewModel.SelectedCategory, Converter={StaticResource NullToAllConverter}}"
+                          SelectedIndex="0"
                           Width="180">
                     <x:String>All</x:String>
                     <x:String>Training</x:String>
@@ -52,12 +50,12 @@
             </Grid>
 
             <Grid Grid.Column="2" Margin="10,10,0,10">
-                <TextBlock VerticalAlignment="Center" FontSize="{StaticResource SmallFontSize}">Label:</TextBlock>
+                <TextBlock x:Uid="Images_Label" VerticalAlignment="Center" FontSize="{StaticResource SmallFontSize}" />
             </Grid>
 
             <Grid Grid.Column="3" Margin="10,10,0,10">
                 <ComboBox VerticalAlignment="Center"
-                          SelectedItem="{x:Bind ViewModel.SelectedLabel, Converter={StaticResource NullToAllConverter}}"
+                          SelectedIndex="0"
                           Width="90">
                     <x:String>All</x:String>
                     <x:String>0</x:String>
