@@ -115,8 +115,8 @@ namespace DigitClassifier.Services
                 false => $"DigitClassifier_Network_{DateTime.UtcNow.ToString("ddMMyyyy_HHmmss")}.json"
             };
 
-            using var stream = File.Open(Path.Combine(folder, fileName), FileMode.OpenOrCreate);
-            await JsonSerializer.SerializeAsync(stream, network);
+            var serialized = JsonSerializer.Serialize(network);
+            await File.WriteAllTextAsync(Path.Combine(folder, fileName), serialized);
         }
     }
 }

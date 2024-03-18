@@ -9,6 +9,64 @@
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="0" Grid.Row="0" Margin="0,4,0,4">
+                <TextBlock x:Uid="Training_Epochs" VerticalAlignment="Center" FontSize="{StaticResource MediumFontSize}" />
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0" Margin="10,4,0,4">
+                <TextBox x:Name="Epochs"
+                         Style="{StaticResource NoUnderlineTextBoxStyle}"
+                         VerticalContentAlignment="Center"
+                         Padding="12,6,12,6"
+                         BorderThickness="0"
+                         CornerRadius="0"
+                         TextWrapping="NoWrap"
+                         IsSpellCheckEnabled="False"
+                         PlaceholderText="eg. 100"/>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="1" Margin="0,4,0,4">
+                <TextBlock x:Uid="Training_LearningRate" VerticalAlignment="Center" FontSize="{StaticResource MediumFontSize}" />
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="1" Margin="10,4,0,4">
+                <TextBox x:Name="LearningRate"
+                         Style="{StaticResource NoUnderlineTextBoxStyle}"
+                         VerticalContentAlignment="Center"
+                         Padding="12,6,12,6"
+                         BorderThickness="0"
+                         CornerRadius="0"
+                         TextWrapping="NoWrap"
+                         IsSpellCheckEnabled="False"
+                         PlaceholderText="eg. 0.05"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Button x:Uid="Training_Train"
+                    x:Name="TrainButton"
+                    Margin="10,5,10,15"
+                    FontFamily="{StaticResource ApplicationRegularFont}"
+                    FontSize="{StaticResource MediumFontSize}"
+                    Padding="24,8,24,4" HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Click="TrainButton_Click"></Button>
+        </Grid>
     </Grid>
 </Page>

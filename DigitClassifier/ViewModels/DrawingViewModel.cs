@@ -28,7 +28,7 @@ namespace DigitClassifier.ViewModels
             if (_networksService.ActiveNetwork == null)
                 return;
 
-            var calculatedResults = _networksService.ActiveNetwork.Calculate(inputs).Select((value, index) => new CalculatedResult(index, value));
+            var calculatedResults = _networksService.ActiveNetwork.FeedForward(inputs).Select((value, index) => new CalculatedResult(index, value));
             calculatedResults = [.. calculatedResults.OrderByDescending(x => x.Result)];
 
             foreach (var calculatedResult in calculatedResults)

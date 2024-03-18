@@ -10,6 +10,7 @@ namespace NeuralNetwork
             return (activationFunctionType) switch
             {
                 ActivationFunctionType.Sigmoid => new Sigmoid(),
+                ActivationFunctionType.ReLU => new ReLU(),
                 _ => throw new Exception($"The activation function for the key: {activationFunctionType} was not found")
             };
         }

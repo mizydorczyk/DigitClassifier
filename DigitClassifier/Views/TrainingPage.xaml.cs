@@ -11,6 +11,19 @@ namespace DigitClassifier.Views
         {
             ViewModel = App.GetService<TrainingViewModel>();
             InitializeComponent();
+
+            ViewModel.TrainingEnded += ViewModel_TrainingEnded;
+        }
+
+        private void ViewModel_TrainingEnded(object? sender, EventArgs e)
+        {
+            TrainButton.IsEnabled = true;
+        }
+
+        private void TrainButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+        {
+            TrainButton.IsEnabled = false;
+            ViewModel.TrainClickedCommand.Execute(new string[] { Epochs.Text, LearningRate.Text });
         }
     }
 }

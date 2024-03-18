@@ -159,4 +159,13 @@
   <data name="Shell_Training.Content" xml:space="preserve">
     <value>Training</value>
   </data>
+  <data name="Training_Epochs.Text" xml:space="preserve">
+    <value>Epochs:</value>
+  </data>
+  <data name="Training_LearningRate.Text" xml:space="preserve">
+    <value>Learning rate:</value>
+  </data>
+  <data name="Training_Train.Content" xml:space="preserve">
+    <value>Train</value>
+  </data>
 </root>
