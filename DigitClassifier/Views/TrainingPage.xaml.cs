@@ -23,7 +23,7 @@ namespace DigitClassifier.Views
         private void TrainButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
         {
             TrainButton.IsEnabled = false;
-            ViewModel.TrainClickedCommand.Execute(new string[] { Epochs.Text, LearningRate.Text });
+            ViewModel.TrainClickedCommand.Execute(new string[] { Epochs.Text, LearningRate.Text, Regularization.Text, Momentum.Text });
         }
     }
 }

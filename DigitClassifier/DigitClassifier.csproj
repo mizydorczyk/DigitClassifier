@@ -13,35 +13,44 @@
         <UseRidGraph>true</UseRidGraph>
         <UseWinUI>true</UseWinUI>
         <EnableMsixTooling>true</EnableMsixTooling>
+        <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+        <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+        <PackageCertificateThumbprint>DE07833D05FF8191B0696151FFF07C467595B598</PackageCertificateThumbprint>
+        <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+        <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+        <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+        <GenerateTestArtifacts>True</GenerateTestArtifacts>
+        <AppxBundle>Never</AppxBundle>
+        <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Remove="Assets\Networks\**"/>
-        <Content Remove="Assets\Networks\**"/>
-        <EmbeddedResource Remove="Assets\Networks\**"/>
-        <None Remove="Assets\Networks\**"/>
-        <Page Remove="Assets\Networks\**"/>
+        <Compile Remove="Assets\Networks\**" />
+        <Content Remove="Assets\Networks\**" />
+        <EmbeddedResource Remove="Assets\Networks\**" />
+        <None Remove="Assets\Networks\**" />
+        <Page Remove="Assets\Networks\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0"/>
-        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000"/>
-        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.3233"/>
-        <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9"/>
-        <PackageReference Include="Serilog" Version="3.1.1"/>
-        <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0"/>
-        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0"/>
-        <PackageReference Include="WinUIEx" Version="2.3.4"/>
-        <Manifest Include="$(ApplicationManifest)"/>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.2.0" />
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />
+        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.3233" />
+        <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
+        <PackageReference Include="Serilog" Version="3.1.1" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+        <PackageReference Include="WinUIEx" Version="2.3.4" />
+        <Manifest Include="$(ApplicationManifest)" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
-        <ProjectCapability Include="Msix"/>
+        <ProjectCapability Include="Msix" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\NeuralNetwork\NeuralNetwork.csproj"/>
+        <ProjectReference Include="..\NeuralNetwork\NeuralNetwork.csproj" />
     </ItemGroup>
     <ItemGroup>
         <None Update="appsettings.json">

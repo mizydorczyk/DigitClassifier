@@ -23,6 +23,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Column="0" Grid.Row="0" Margin="0,4,0,4">
@@ -54,7 +56,39 @@
                          CornerRadius="0"
                          TextWrapping="NoWrap"
                          IsSpellCheckEnabled="False"
-                         PlaceholderText="eg. 0.05"/>
+                         PlaceholderText="eg. 0,05"/>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="2" Margin="0,4,0,4">
+                <TextBlock x:Uid="Training_Regularization" VerticalAlignment="Center" FontSize="{StaticResource MediumFontSize}" />
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="2" Margin="10,4,0,4">
+                <TextBox x:Name="Regularization"
+                         Style="{StaticResource NoUnderlineTextBoxStyle}"
+                         VerticalContentAlignment="Center"
+                         Padding="12,6,12,6"
+                         BorderThickness="0"
+                         CornerRadius="0"
+                         TextWrapping="NoWrap"
+                         IsSpellCheckEnabled="False"
+                         PlaceholderText="eg. 0,9"/>
+            </Grid>
+
+            <Grid Grid.Column="0" Grid.Row="3" Margin="0,4,0,4">
+                <TextBlock x:Uid="Training_Momentum" VerticalAlignment="Center" FontSize="{StaticResource MediumFontSize}" />
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="3" Margin="10,4,0,4">
+                <TextBox x:Name="Momentum"
+                         Style="{StaticResource NoUnderlineTextBoxStyle}"
+                         VerticalContentAlignment="Center"
+                         Padding="12,6,12,6"
+                         BorderThickness="0"
+                         CornerRadius="0"
+                         TextWrapping="NoWrap"
+                         IsSpellCheckEnabled="False"
+                         PlaceholderText="eg. 0,1"/>
             </Grid>
         </Grid>
 
@@ -69,4 +103,4 @@
                     Click="TrainButton_Click"></Button>
         </Grid>
     </Grid>
-</Page>
+</Page> 

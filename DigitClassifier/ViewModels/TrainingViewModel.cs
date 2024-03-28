@@ -9,9 +9,6 @@ namespace DigitClassifier.ViewModels
 {
     public partial class TrainingViewModel : ObservableRecipient, INavigationAware
     {
-        private const double _regularization = 0.9;
-        private const double _momentum = 0.1;
-
         private readonly INetworksService _networksService;
         private readonly IImagesService _imagesService;
         private readonly INotificationService _notificationService;
@@ -33,8 +30,10 @@ namespace DigitClassifier.ViewModels
             {
                 var epochs = int.Parse(args[0]);
                 var learningRate = double.Parse(args[1]);
+                var regularization = double.Parse(args[2]);
+                var momentum = double.Parse(args[3]);
 
-                await TrainNetwork(epochs, learningRate);
+                await TrainNetwork(epochs, learningRate, regularization, momentum);
             }
             catch (Exception ex)
             {
@@ -52,7 +51,7 @@ namespace DigitClassifier.ViewModels
             await LoadNetworks(true);
         }
 
-        private async Task TrainNetwork(int epochs, double learningRate)
+        private async Task TrainNetwork(int epochs, double learningRate, double regularization, double momentum)
         {
             if (_networksService.ActiveNetwork == null)
                 return;
@@ -66,7 +65,7 @@ namespace DigitClassifier.ViewModels
             {
                 for (int epoch = 0; epoch < epochs; epoch++)
                 {
-                    _networksService.ActiveNetwork.Learn(inputs, targets, learningRate, _regularization, _momentum);
+                    _networksService.ActiveNetwork.Learn(inputs, targets, learningRate, regularization, momentum);
                 }
             });
 

@@ -165,6 +165,12 @@
   <data name="Training_LearningRate.Text" xml:space="preserve">
     <value>Learning rate:</value>
   </data>
+  <data name="Training_Momentum.Text" xml:space="preserve">
+    <value>Momentum</value>
+  </data>
+  <data name="Training_Regularization.Text" xml:space="preserve">
+    <value>Regularization</value>
+  </data>
   <data name="Training_Train.Content" xml:space="preserve">
     <value>Train</value>
   </data>
