@@ -1,5 +1,4 @@
 ﻿using NeuralNetwork.Interfaces;
-using System;
 using System.Text.Json.Serialization;
 
 namespace NeuralNetwork
@@ -77,7 +76,7 @@ namespace NeuralNetwork
             double[] activations = new double[NumberOfNodesOut];
             for (int nodeOut = 0; nodeOut < activations.Length; nodeOut++)
             {
-                activations[nodeOut] = activationFunction.Activate(weightedInputs, nodeOut);
+                activations[nodeOut] = activationFunction.Activate(weightedInputs[nodeOut]);
             }
 
             return activations;
@@ -108,7 +107,7 @@ namespace NeuralNetwork
             // apply activation function
             for (int nodeOut = 0; nodeOut < learnData.Activations.Length; nodeOut++)
             {
-                learnData.Activations[nodeOut] = activationFunction.Activate(learnData.WeightedInputs, nodeOut);
+                learnData.Activations[nodeOut] = activationFunction.Activate(learnData.WeightedInputs[nodeOut]);
             }
 
             return learnData.Activations;
@@ -123,7 +122,7 @@ namespace NeuralNetwork
             {
                 // evaluate partial derivatives for mean squared error function
                 double errorDerivative = layerLearnData.Activations[i] - expectedOutputs[i];
-                double activationDerivative = activationFunction.Derivative(layerLearnData.WeightedInputs, i);
+                double activationDerivative = activationFunction.Derivative(layerLearnData.WeightedInputs[i]);
                 layerLearnData.NodeValues[i] = errorDerivative * activationDerivative;
             }
         }
@@ -142,7 +141,7 @@ namespace NeuralNetwork
                     double weightedInputDerivative = oldLayer.Weights[oldNodeIndex * NumberOfNodesOut + newNodeIndex];
                     newNodeValue += weightedInputDerivative * oldNodeValues[oldNodeIndex];
                 }
-                newNodeValue *= activationFunction.Derivative(layerLearnData.WeightedInputs, newNodeIndex);
+                newNodeValue *= activationFunction.Derivative(layerLearnData.WeightedInputs[newNodeIndex]);
                 layerLearnData.NodeValues[newNodeIndex] = newNodeValue;
             }
 
@@ -203,12 +202,16 @@ namespace NeuralNetwork
         {
             for (int i = 0; i < Weights.Length; i++)
             {
-                double x1 = 1 - random.NextDouble();
-                double x2 = 1 - random.NextDouble();
+                var a = random.NextDouble();
+                var b = random.NextDouble();
+                Weights[i] = Math.Sqrt(-2.0 * Math.Log(a)) * Math.Sin(2.0 * Math.PI * b);
+            }
 
-                double y1 = Math.Sqrt(-2.0 * Math.Log(x1)) * Math.Cos(2.0 * Math.PI * x2);
-
-                Weights[i] = y1 / Math.Sqrt(NumberOfNodesIn);
+            for (int i = 0; i < Biases.Length; i++)
+            {
+                var a = random.NextDouble();
+                var b = random.NextDouble();
+                Biases[i] = Math.Sqrt(-2.0 * Math.Log(a)) * Math.Sin(2.0 * Math.PI * b);
             }
         }
     }
