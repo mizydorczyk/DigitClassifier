@@ -3,9 +3,12 @@ using DigitClassifier.Models;
 
 namespace DigitClassifier.Helpers
 {
-    public class ImagesReader
+    public class ImagesReader : IDisposable
     {
-        public IList<Image> Read(ImageCategory category, string labelsPath, string imagesPath)
+        private readonly FileStream _labelsFileStream;
+        private readonly FileStream _imagesFileStream;
+
+        public ImagesReader(string labelsPath, string imagesPath)
         {
             // check if path exists
             if (!Path.Exists(labelsPath))
@@ -14,6 +17,11 @@ namespace DigitClassifier.Helpers
             if (!Path.Exists(imagesPath))
                 throw new ArgumentException("Images path is not valid");
 
+            _labelsFileStream = new FileStream(labelsPath, FileMode.Open);
+            _imagesFileStream = new FileStream(imagesPath, FileMode.Open);
+        }
+        public List<Image> Read(ImageCategory category = default)
+        {
             // open FileStream, BinaryReader for labels and get the header
 
             // [offset] [type]          [value]          [description]
@@ -25,10 +33,8 @@ namespace DigitClassifier.Helpers
             // xxxx     unsigned byte   ?? label
             // The labels values are 0 to 9.
 
-            using var labelsFileStream = new FileStream(labelsPath, FileMode.Open);
-
-            int magicNumberLabels = labelsFileStream.ReadBigEndianInt32();
-            int numberOfLabels = labelsFileStream.ReadBigEndianInt32();
+            int magicNumberLabels = _labelsFileStream.ReadBigEndianInt32();
+            int numberOfLabels = _labelsFileStream.ReadBigEndianInt32();
 
             // open FileStream, BinaryReader for images and get the header
 
@@ -43,12 +49,10 @@ namespace DigitClassifier.Helpers
             // xxxx     unsigned byte   ?? pixel
             // Pixels are organized row-wise. Pixel values are 0 to 255. 0 means background(white), 255 means foreground(black). 
 
-            using var imagesFileStream = new FileStream(imagesPath, FileMode.Open);
-
-            int magicNumberImages = imagesFileStream.ReadBigEndianInt32();
-            int numberOfImages = imagesFileStream.ReadBigEndianInt32();
-            int imageWidth = imagesFileStream.ReadBigEndianInt32();
-            int imageHeight = imagesFileStream.ReadBigEndianInt32();
+            int magicNumberImages = _imagesFileStream.ReadBigEndianInt32();
+            int numberOfImages = _imagesFileStream.ReadBigEndianInt32();
+            int imageWidth = _imagesFileStream.ReadBigEndianInt32();
+            int imageHeight = _imagesFileStream.ReadBigEndianInt32();
 
             if (numberOfImages != numberOfLabels)
                 throw new ArgumentException("The number of images is different from labels.");
@@ -56,17 +60,23 @@ namespace DigitClassifier.Helpers
             var images = new List<Image>();
 
             // parse actuall images and labels
-
             for (int i = 0; i < numberOfImages; i++)
             {
-                var label = Convert.ToInt32(labelsFileStream.ReadByte());
+                var label = Convert.ToInt32(_labelsFileStream.ReadByte());
                 var bytes = new byte[imageWidth * imageHeight];
-                imagesFileStream.Read(bytes, 0, imageWidth * imageHeight);
+                _imagesFileStream.Read(bytes, 0, imageWidth * imageHeight);
 
-                images.Add(new Image(label, category, bytes, imageWidth, imageHeight));
+                var image = new Image(label, category, bytes, imageWidth, imageHeight);
+                images.Add(image);
             }
 
             return images;
+        }
+
+        public void Dispose()
+        {
+            _labelsFileStream.Dispose();
+            _imagesFileStream.Dispose();
         }
     }
 }

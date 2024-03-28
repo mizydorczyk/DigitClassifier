@@ -18,8 +18,6 @@ namespace DigitClassifier.Services
         {
             if (_images != null && !refresh)
                 return _images;
-
-            var reader = new ImagesReader();
             var images = new List<Image>();
 
             var options = new string[]
@@ -41,11 +39,17 @@ namespace DigitClassifier.Services
                     throw new Exception($"The setting for the key: {option} was not found");
             }
 
-            var trainingSet = reader.Read(ImageCategory.Training, paths["TrainingLabelsFile"], paths["TrainingImagesFile"]);
-            var testSet = reader.Read(ImageCategory.Test, paths["TestLabelsFile"], paths["TestImagesFile"]);
+            using (var reader = new ImagesReader(paths["TrainingLabelsFile"], paths["TrainingImagesFile"]))
+            {
+                var trainingSet = reader.Read(ImageCategory.Training);
+                images.AddRange(trainingSet);
+            }
 
-            images.AddRange(trainingSet);
-            images.AddRange(testSet);
+            using (var reader = new ImagesReader(paths["TestLabelsFile"], paths["TestImagesFile"]))
+            {
+                var testSet = reader.Read(ImageCategory.Test);
+                images.AddRange(testSet);
+            }
 
             _images = images;
 

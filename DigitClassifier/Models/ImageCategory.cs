@@ -2,6 +2,7 @@
 {
     public enum ImageCategory
     {
+        None,
         Training,
         Test
     }
